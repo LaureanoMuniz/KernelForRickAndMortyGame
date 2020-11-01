@@ -81,7 +81,7 @@ void inicializar_pantalla(){ // checkear si hace falta dejar el espacio en negro
   screen_draw_box(initFila, initCol, sizeFila, sizeCol, character, attr);
   
   //Pinto fondo de verde
-  initFila = 0;
+  initFila = 1;
   initCol  = 0;
   sizeFila = 40;
   sizeCol  = 80;
@@ -89,7 +89,7 @@ void inicializar_pantalla(){ // checkear si hace falta dejar el espacio en negro
   attr = C_BG_LIGHT_GREEN;
   screen_draw_box(initFila, initCol, sizeFila, sizeCol, character, attr);
   //Agrego barra roja
-  initFila = 42;
+  initFila = 43;
   initCol  = 5;
   sizeFila = 3;
   sizeCol  = 10;
@@ -98,7 +98,7 @@ void inicializar_pantalla(){ // checkear si hace falta dejar el espacio en negro
   screen_draw_box(initFila, initCol, sizeFila, sizeCol, character, attr);
   
   //Agrego barra azul
-  initFila = 42;
+  initFila = 43;
   initCol  = 65;
   sizeFila = 3;
   sizeCol  = 10;
@@ -112,20 +112,20 @@ void inicializar_pantalla(){ // checkear si hace falta dejar el espacio en negro
   uint32_t numero = 0;
   uint32_t size = 8;
   uint32_t x = 6;
-  uint32_t y = 43;
+  uint32_t y = 44;
   uint16_t atr = C_FG_WHITE;
   print_hex(numero, size, x, y, atr);
   numero = 0;
   size = 8;
   x = 66;
-  y = 43;
+  y = 44;
   atr = C_FG_WHITE;
   print_hex(numero, size, x, y, atr);              
 }
 
 void print_exception(uint32_t excepcion){
-  print("EXCEPCION ",30,25,C_FG_WHITE|C_BG_GREEN);
+  print("EXCEPCION ",0,0,C_FG_WHITE|C_BG_BLACK);
   uint32_t tam=1+(excepcion>=10);
-  print_dec(excepcion,tam,40,25,C_FG_WHITE|C_BG_GREEN);
+  print_dec(excepcion,tam,10,0,C_FG_WHITE|C_BG_BLACK);
 }
 
