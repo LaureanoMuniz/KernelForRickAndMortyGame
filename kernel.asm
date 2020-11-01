@@ -7,6 +7,11 @@
 
 global start
 extern inicializar_pantalla
+extern GDT_DESC 
+extern IDT_DESC
+extern idt_init
+extern pic_reset
+extern pic_enable
 
 BITS 16
 ;; Saltear seccion de datos
@@ -21,6 +26,7 @@ start_rm_len equ    $ - start_rm_msg
 start_pm_msg db     'Iniciando kernel en Modo Protegido'
 start_pm_len equ    $ - start_pm_msg
 
+
 %define INIT_STACK 0x00025000
 %define SPACE 32
 %define TAMANO1 8000
@@ -30,9 +36,7 @@ start_pm_len equ    $ - start_pm_msg
 %define GDT_OFF_C3_DESC   12 << 3
 %define GDT_OFF_D3_DESC   13 << 3
 %define GDT_OFF_VID_DESC  14 << 3
-extern GDT_DESC 
-extern IDT_DESC
-extern idt_init
+
 ;;
 ;; Seccion de código.
 ;; -------------------------------------------------------------------------- ;;
@@ -113,7 +117,7 @@ modo_protegido:
         ;add edx, 2
         ;jmp .pintar
     xchg bx,bx
-    call inicializar_pantalla ;Fijarse si puedo usar un selector de segmento en C
+    call inicializar_pantalla ;Fijarse si puedo usar un selector de segmento en C. No
     ; Inicializar el manejador de memoria
     
     ; Inicializar el directorio de paginas
@@ -127,21 +131,22 @@ modo_protegido:
     ; Inicializar tss de la tarea Idle
 
     ; Inicializar el scheduler
-
+    xchg bx, bx
     ; Inicializar la IDT
     call idt_init
     ; Cargar IDT
     lidt [IDT_DESC]
-    sti 
-    xchg bx, bx
+   
     xor eax, eax
     idiv eax
     ; Configurar controlador de interrupciones
-
+    call pic_reset
+    call pic_enable
+    
     ; Cargar tarea inicial
 
     ; Habilitar interrupciones
-
+    sti 
     ; Saltar a la primera tarea: Idle
 
     ; Ciclar infinitamente (por si algo sale mal...)

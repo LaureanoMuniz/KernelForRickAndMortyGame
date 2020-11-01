@@ -17,15 +17,15 @@ extern pic_finish1
 
 ;; Sched
 extern sched_next_task
-
 extern print_exception
+
 ;;
 ;; Definición de MACROS
 ;; -------------------------------------------------------------------------- ;;
 %macro ISR 1
 global _isr%1
 
-_isr%1:
+_isr%1:    
     mov eax, %1
     push eax
     call print_exception
