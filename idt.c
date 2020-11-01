@@ -60,4 +60,10 @@ void idt_init() {
   IDT_ENTRY(18);
   IDT_ENTRY(19);
   IDT_ENTRY(20);
+  IDT_ENTRY(32);
+  IDT_ENTRY(33);
+  IDT_ENTRY(88);
+  IDT_ENTRY(89);
+  IDT_ENTRY(100);
+  IDT_ENTRY(123);
 }

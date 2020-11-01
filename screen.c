@@ -129,3 +129,16 @@ void print_exception(uint32_t excepcion){
   print_dec(excepcion,tam,10,0,C_FG_WHITE|C_BG_BLACK);
 }
 
+
+void print_digito(uint8_t digito){
+ uint8_t claves[10] = {0x0B,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0A};
+  //uint32_t claves[10] = {0,27,49,50,51,52,53,54,55,56};
+  //print_dec(digito,1,25,25,C_FG_WHITE|C_BG_BLACK);
+ 
+ for (uint32_t i = 0; i<10; i++){
+  if (digito == claves[i]){
+   print_dec(i,1,79,0,C_FG_WHITE|C_BG_BLACK);
+  }
+ }
+
+}
