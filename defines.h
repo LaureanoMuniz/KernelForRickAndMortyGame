@@ -25,6 +25,9 @@
 // X Columnas
 #define SIZE_M 80
 
+// Atributo de Interruption Gate
+#define ATTR_INT_GATE 0x8E00
+
 /* Indices en la gdt */
 /* -------------------------------------------------------------------------- */
 #define GDT_IDX_NULL_DESC 0
@@ -37,7 +40,13 @@
 /* Offsets en la gdt */
 /* -------------------------------------------------------------------------- */
 #define GDT_OFF_NULL_DESC (GDT_IDX_NULL_DESC << 3)
- 
+#define GDT_OFF_C0_DESC   (GDT_IDX_C0_DESC << 3)
+#define GDT_OFF_D0_DESC   (GDT_IDX_D0_DESC << 3)
+#define GDT_OFF_C3_DESC   (GDT_IDX_C3_DESC << 3)
+#define GDT_OFF_D3_DESC   (GDT_IDX_D3_DESC << 3)
+#define GDT_OFF_VID_DESC  (GDT_IDX_VID_DESC << 3)
+
+
 /* Direcciones de memoria */
 /* -------------------------------------------------------------------------- */
 

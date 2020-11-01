@@ -31,6 +31,8 @@ start_pm_len equ    $ - start_pm_msg
 %define GDT_OFF_D3_DESC   13 << 3
 %define GDT_OFF_VID_DESC  14 << 3
 extern GDT_DESC 
+extern IDT_DESC
+extern idt_init
 ;;
 ;; Seccion de código.
 ;; -------------------------------------------------------------------------- ;;
@@ -110,10 +112,10 @@ modo_protegido:
         ;mov [ds:edx], ax
         ;add edx, 2
         ;jmp .pintar
-
-    call inicializar_pantalla
+    xchg bx,bx
+    call inicializar_pantalla ;Fijarse si puedo usar un selector de segmento en C
     ; Inicializar el manejador de memoria
- 
+    
     ; Inicializar el directorio de paginas
     
     ; Cargar directorio de paginas
@@ -127,9 +129,13 @@ modo_protegido:
     ; Inicializar el scheduler
 
     ; Inicializar la IDT
-    
+    call idt_init
     ; Cargar IDT
- 
+    lidt [IDT_DESC]
+    sti 
+    xchg bx, bx
+    xor eax, eax
+    idiv eax
     ; Configurar controlador de interrupciones
 
     ; Cargar tarea inicial

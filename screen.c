@@ -69,7 +69,7 @@ void screen_draw_box(uint32_t fInit, uint32_t cInit, uint32_t fSize,
   }
 }
 
-void inicializar_pantalla(){
+void inicializar_pantalla(){ // checkear si hace falta dejar el espacio en negro arriba
   
   //Limpio pantalla 
   uint32_t initFila = 0;
@@ -121,5 +121,11 @@ void inicializar_pantalla(){
   y = 43;
   atr = C_FG_WHITE;
   print_hex(numero, size, x, y, atr);              
+}
+
+void print_exception(uint32_t excepcion){
+  print("EXCEPCION ",30,25,C_FG_WHITE|C_BG_GREEN);
+  uint32_t tam=1+(excepcion>=10);
+  print_dec(excepcion,tam,40,25,C_FG_WHITE|C_BG_GREEN);
 }
 

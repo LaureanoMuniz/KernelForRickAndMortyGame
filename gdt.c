@@ -28,7 +28,7 @@ gdt_entry_t gdt[GDT_COUNT] = {
             .base_31_24 = 0x00,
         },
     [GDT_IDX_C0_DESC] = {
-            .limit_15_0 = 0xC8FF,
+            .limit_15_0 = 0xC8FF, //Checkear esto
             .limit_19_16 = 0x00,
             .base_15_0 = 0x0000,
             .base_23_16 = 0x00,
