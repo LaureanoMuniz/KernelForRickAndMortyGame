@@ -129,6 +129,13 @@ void print_exception(uint32_t excepcion){
   print_dec(excepcion,tam,10,0,C_FG_WHITE|C_BG_BLACK);
 }
 
+//void print(const char* text, uint32_t x, uint32_t y, uint16_t attr) 
+void printLU(){
+
+  print("498/19",20,25,C_FG_WHITE|C_BG_LIGHT_GREEN);
+  print("460/19",20,26,C_FG_WHITE|C_BG_LIGHT_GREEN);
+  print("577/18",20,27,C_FG_WHITE|C_BG_LIGHT_GREEN);
+}
 
 void print_digito(uint8_t digito){
  uint8_t claves[10] = {0x0B,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0A};
@@ -142,3 +149,4 @@ void print_digito(uint8_t digito){
  }
 
 }
+

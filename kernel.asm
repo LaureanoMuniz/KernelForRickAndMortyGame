@@ -12,7 +12,9 @@ extern IDT_DESC
 extern idt_init
 extern pic_reset
 extern pic_enable
-
+extern mmu_init_kernel_dir
+extern mmu_init
+extern printLU
 BITS 16
 ;; Saltear seccion de datos
 jmp start
@@ -120,12 +122,21 @@ modo_protegido:
     call inicializar_pantalla ;Fijarse si puedo usar un selector de segmento en C. No
     ; Inicializar el manejador de memoria
     
+    ;call mmu_init
     ; Inicializar el directorio de paginas
     
-    ; Cargar directorio de paginas
+    call mmu_init_kernel_dir ; Deja en eax la direccion fisica del directorio de tablas
+    xchg bx, bx
 
+    ; Cargar directorio de paginas
+    mov cr3, eax
     ; Habilitar paginacion
     
+    mov eax, cr0
+    or eax, 0x80000000; pongo un 1 en el bit 31 
+    mov cr0, eax
+
+    call printLU
     ; Inicializar tss
 
     ; Inicializar tss de la tarea Idle
@@ -137,8 +148,8 @@ modo_protegido:
     ; Cargar IDT
     lidt [IDT_DESC]
    
-    xor eax, eax
-    idiv eax
+    ;xor eax, eax
+    ;idiv eax
     ; Configurar controlador de interrupciones
     call pic_reset
     call pic_enable
@@ -147,6 +158,7 @@ modo_protegido:
 
     ; Habilitar interrupciones
     sti 
+
     ; Saltar a la primera tarea: Idle
 
     ; Ciclar infinitamente (por si algo sale mal...)

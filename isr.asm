@@ -118,7 +118,6 @@ _isr123:
     call pic_finish1 
     popad
     iret 
-    iret
 
 ;; Funciones Auxiliares
 ;; -------------------------------------------------------------------------- ;;
