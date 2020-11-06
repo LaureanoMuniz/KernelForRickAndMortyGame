@@ -78,7 +78,7 @@ paddr_t mmu_init_kernel_dir(void) {
 
  	page_table_entry* pt =  (page_table_entry*) (pde[directoryIndex].base << 12); //Dejo 12 ceros en la parte baja
  	paddr_t phy_offset = phy & ~ 0xfff;
- 	pt[tableIndex].base = phy_offset;
+ 	pt[tableIndex].base = (uint32_t) phy_offset >> 12;
  	pt[tableIndex].present = (uint8_t) attrs & 1;
  	pt[tableIndex].read_write = (uint8_t) (attrs & 2) >> 1;
  	pt[tableIndex].user_supervisor = (uint8_t)(attrs & 4) >> 2;

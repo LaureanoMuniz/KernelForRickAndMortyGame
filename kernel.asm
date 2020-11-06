@@ -14,6 +14,7 @@ extern pic_reset
 extern pic_enable
 extern mmu_init_kernel_dir
 extern mmu_init
+extern mmu_map_page
 extern printLU
 BITS 16
 ;; Saltear seccion de datos
@@ -122,7 +123,7 @@ modo_protegido:
     call inicializar_pantalla ;Fijarse si puedo usar un selector de segmento en C. No
     ; Inicializar el manejador de memoria
     
-    ;call mmu_init
+    call mmu_init
     ; Inicializar el directorio de paginas
     
     call mmu_init_kernel_dir ; Deja en eax la direccion fisica del directorio de tablas
@@ -137,6 +138,16 @@ modo_protegido:
     mov cr0, eax
 
     call printLU
+
+    xchg bx, bx
+    push 3
+    push 0x400000
+    push 0x08000000
+    mov eax, cr3
+    push eax
+    call mmu_map_page
+    add esp, 16
+    mov BYTE [0x08000000], 0XFE
     ; Inicializar tss
 
     ; Inicializar tss de la tarea Idle
