@@ -111,17 +111,45 @@ paddr_t mmu_init_kernel_dir(void) {
 	uint32_t cr3_offset = cr3 >> 12;
  	cr3_offset = cr3_offset << 12;
 
+
  	page_directory_entry* pde = (page_directory_entry*) cr3_offset;
- 	
+ 	if(pde[directoryIndex].present != 1){
+		 return 0; //Preguntar que returnear
+	}
  	page_table_entry* pt =  (page_table_entry*) (pde[directoryIndex].base << 12); // Dejo 12 ceros en la parte baja.
- 	paddr_t res = (paddr_t) pt[tableIndex].base + (paddr_t) offset;
+ 	paddr_t res = ((paddr_t) pt[tableIndex].base << 12) + (paddr_t) offset; //+ offset hace falta? quizas devuelva basura
  	pt[tableIndex] = (page_table_entry){0}; // En el video pide poner 0 solo en el bit de present
-	pde[directoryIndex] = (page_directory_entry){0};
+	tlbflush();
  	return res; //Retorna la direccion fisica en la que estaba mapeada la direccion virtual.
 
  }
-// paddr_t mmu_init_task_dir(paddr_t phy_start, paddr_t code_start, size_t
-// pages) {}
+
+
+paddr_t mmu_init_task_dir(paddr_t phy_start, paddr_t code_start, size_t pages, uint32_t cr3) {
+	paddr_t cr3_new = mmu_next_free_kernel_page();
+	page_directory_entry* directorio = (page_directory_entry*) cr3_new;
+	
+	for(int i = 0; i<1024; i++){
+		directorio[i] = (page_directory_entry){0};
+	}
+	
+	for(vaddr_t i = 0; i<1024; i++){
+		mmu_map_page(cr3_new, i<<12, (paddr_t) i << 12, 3); //user o no?
+	}
+	for(size_t i = 0; i < pages; i++){
+		mmu_map_page(cr3_new, TASK_CODE_VIRTUAL + i*0x1000, phy_start + i*0x1000, 3);
+		mmu_map_page(cr3, TASK_CODE_VIRTUAL + i*0x1000, phy_start + i*0x1000, 3);
+	}
+	paddr_t* codigo = (paddr_t*)code_start;
+	paddr_t* copiar = (paddr_t*)TASK_CODE_VIRTUAL;
+	for(int i=0; i<(1024*(int)pages)/4; i++){
+		copiar[i]=codigo[i];
+	}
+	for(size_t i = 0; i < pages; i++){
+		mmu_unmap_page(cr3, TASK_CODE_VIRTUAL + i*0x1000);
+	}
+	return cr3_new;
+}
 
 
 
