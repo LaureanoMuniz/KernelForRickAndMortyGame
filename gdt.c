@@ -102,6 +102,36 @@ gdt_entry_t gdt[GDT_COUNT] = {
             .db = 1,
             .g = 0,
     },
+    [GDT_IDX_TSS_INIT] = {
+            .limit_15_0 = sizeof(tss_initial)-1, //Si se quiere se puede cambiar
+            .limit_19_16 = 0x00,
+            .base_15_0 = 0x0000,
+            .base_23_16 = 0x00,
+            .base_31_24 = 0x00,
+            .type = 0x0B,
+            .s = 0,
+            .dpl = 0,
+            .p = 1,
+            .avl = 0,
+            .l = 0,
+            .db = 0,
+            .g = 0,
+    },
+    [GDT_IDX_TSS_IDLE] = {
+            .limit_15_0 = sizeof(tss_idle)-1, //Same arriba
+            .limit_19_16 = 0x00,
+            .base_15_0 = 0x0000,
+            .base_23_16 = 0x00,
+            .base_31_24 = 0x00,
+            .type = 0x09,
+            .s = 0,
+            .dpl = 0,
+            .p = 1,
+            .avl = 0,
+            .l = 0,
+            .db = 0,
+            .g = 0,
+    },
 
 };
 

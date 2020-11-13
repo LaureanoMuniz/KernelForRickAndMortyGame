@@ -28,6 +28,8 @@
 // Atributo de Interruption Gate
 #define ATTR_INT_GATE 0x8E00
 
+// EFLAGS
+#define EFLAG 0x202
 /* Indices en la gdt */
 /* -------------------------------------------------------------------------- */
 #define GDT_IDX_NULL_DESC 0
@@ -36,6 +38,10 @@
 #define GDT_IDX_C3_DESC   12
 #define GDT_IDX_D3_DESC   13
 #define GDT_IDX_VID_DESC  14
+
+#define GDT_IDX_TSS_INIT  20
+#define GDT_IDX_TSS_IDLE  21
+
 #define GDT_COUNT         35
 /* Offsets en la gdt */
 /* -------------------------------------------------------------------------- */
@@ -46,6 +52,8 @@
 #define GDT_OFF_D3_DESC   (GDT_IDX_D3_DESC << 3)
 #define GDT_OFF_VID_DESC  (GDT_IDX_VID_DESC << 3)
 
+#define GDT_OFF_TSS_INIT  (GDT_IDX_TSS_INIT << 3)
+#define GDT_OFF_TSS_IDLE  (GDT_IDX_TSS_IDLE << 3)
 
 /* Direcciones de memoria */
 /* -------------------------------------------------------------------------- */
@@ -65,6 +73,8 @@
 #define TASK_PAGES        4
 
 /* Direcciones fisicas de codigos */
+#define TASK_IDLE_PHY_START 0x00018000
+
 /* -------------------------------------------------------------------------- */
 /* En estas direcciones estan los códigos de todas las tareas. De aqui se
  * copiaran al destino indicado por TASK_<X>_PHY_START.

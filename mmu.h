@@ -22,7 +22,7 @@ paddr_t mmu_unmap_page(uint32_t cr3, vaddr_t virt);
 
 paddr_t mmu_init_kernel_dir(void);
 
-paddr_t mmu_init_task_dir(paddr_t phy_start, paddr_t code_start, size_t pages, uint32_t cr3);
+paddr_t mmu_init_task_dir(paddr_t phy_start, paddr_t code_start, size_t pages);
 
 
 typedef struct str_page_directory_entry {

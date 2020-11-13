@@ -125,8 +125,9 @@ paddr_t mmu_init_kernel_dir(void) {
  }
 
 
-paddr_t mmu_init_task_dir(paddr_t phy_start, paddr_t code_start, size_t pages, uint32_t cr3) {
+paddr_t mmu_init_task_dir(paddr_t phy_start, paddr_t code_start, size_t pages) {
 	paddr_t cr3_new = mmu_next_free_kernel_page();
+	paddr_t cr3 = rcr3();
 	page_directory_entry* directorio = (page_directory_entry*) cr3_new;
 	
 	for(int i = 0; i<1024; i++){
@@ -134,11 +135,11 @@ paddr_t mmu_init_task_dir(paddr_t phy_start, paddr_t code_start, size_t pages, u
 	}
 	
 	for(vaddr_t i = 0; i<1024; i++){
-		mmu_map_page(cr3_new, i<<12, (paddr_t) i << 12, 3); //user o no?
+		mmu_map_page(cr3_new, i<<12, (paddr_t) i << 12, 3); 
 	}
 	for(size_t i = 0; i < pages; i++){
-		mmu_map_page(cr3_new, TASK_CODE_VIRTUAL + i*0x1000, phy_start + i*0x1000, 3);
-		mmu_map_page(cr3, TASK_CODE_VIRTUAL + i*0x1000, phy_start + i*0x1000, 3);
+		mmu_map_page(cr3_new, TASK_CODE_VIRTUAL + i*0x1000, phy_start + i*0x1000, 7); //Chequear
+		mmu_map_page(cr3, TASK_CODE_VIRTUAL + i*0x1000, phy_start + i*0x1000, 3); //user o no?
 	}
 	paddr_t* codigo = (paddr_t*)code_start;
 	paddr_t* copiar = (paddr_t*)TASK_CODE_VIRTUAL;

@@ -166,14 +166,13 @@ modo_protegido:
     ;paddr_t mmu_init_task_dir(paddr_t phy_start, paddr_t code_start, size_t pages) 
     xchg bx, bx
 
-    mov eax, cr3
-    push eax 
     push 4
     push 0x10000
     push 0x1D04000
     call mmu_init_task_dir
     add esp, 12
-    pop edx
+    mov edx, cr3
+    
     mov cr3, eax
     mov ecx,0
     mov ax, GDT_OFF_VID_DESC
@@ -185,8 +184,9 @@ modo_protegido:
     ; Inicializar tss de la tarea Idle
 
     ; Inicializar el scheduler
-    xchg bx, bx
+    
     ; Inicializar la IDT
+    xchg bx, bx
     call idt_init
     ; Cargar IDT
     lidt [IDT_DESC]
