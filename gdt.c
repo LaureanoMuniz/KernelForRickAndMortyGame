@@ -7,7 +7,7 @@
 */
 
 #include "gdt.h"
-
+#include "tss.h"
 gdt_entry_t gdt[GDT_COUNT] = {
     /* Descriptor nulo*/
     /* Offset = 0x00 */
