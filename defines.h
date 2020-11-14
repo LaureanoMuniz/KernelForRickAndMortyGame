@@ -74,7 +74,8 @@
 
 /* Direcciones fisicas de codigos */
 #define TASK_IDLE_PHY_START 0x00018000
-
+#define TASK_RICK_PHY_START 0x00010000
+#define TASK_MORTY_PHY_START 0x00014000
 /* -------------------------------------------------------------------------- */
 /* En estas direcciones estan los códigos de todas las tareas. De aqui se
  * copiaran al destino indicado por TASK_<X>_PHY_START.

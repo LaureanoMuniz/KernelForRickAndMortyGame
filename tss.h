@@ -57,5 +57,6 @@ extern tss_t tss_initial;
 extern tss_t tss_idle;
 
 void tss_init(void);
+void tss_idle_init(void);
 
 #endif //  __TSS_H__

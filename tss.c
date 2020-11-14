@@ -13,8 +13,8 @@
 
 tss_t tss_initial = {0};
 tss_t tss_idle = {
-  //PTL?
-    .esp0 = KERNEL_STACK, // Completar
+  //Chequear
+    .esp0 = KERNEL_STACK, 
     .ss0 = GDT_OFF_D0_DESC,
     .cr3 = KERNEL_PAGE_DIR,
     .eip = TASK_IDLE_PHY_START,
