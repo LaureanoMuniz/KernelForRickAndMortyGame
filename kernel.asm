@@ -44,6 +44,7 @@ start_pm_len equ    $ - start_pm_msg
 %define GDT_OFF_C3_DESC   12 << 3
 %define GDT_OFF_D3_DESC   13 << 3
 %define GDT_OFF_VID_DESC  14 << 3
+
 %define GDT_SEL_TSS_INIT   20 << 3
 %define GDT_SEL_TSS_IDLE   21 << 3
 
@@ -213,6 +214,7 @@ modo_protegido:
     sti 
 
     ; Saltar a la primera tarea: Idle
+    xchg bx, bx
     jmp GDT_SEL_TSS_IDLE:0
     
     ; Ciclar infinitamente (por si algo sale mal...)

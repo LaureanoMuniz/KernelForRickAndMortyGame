@@ -30,6 +30,8 @@
 
 // EFLAGS
 #define EFLAG 0x202
+
+#define RPL_3 3
 /* Indices en la gdt */
 /* -------------------------------------------------------------------------- */
 #define GDT_IDX_NULL_DESC 0
@@ -41,6 +43,9 @@
 
 #define GDT_IDX_TSS_INIT  20
 #define GDT_IDX_TSS_IDLE  21
+#define GDT_IDX_TSS_RICK  22
+#define GDT_IDX_TSS_MORTY 23
+
 
 #define GDT_COUNT         35
 /* Offsets en la gdt */
@@ -74,8 +79,12 @@
 
 /* Direcciones fisicas de codigos */
 #define TASK_IDLE_PHY_START 0x00018000
-#define TASK_RICK_PHY_START 0x00010000
-#define TASK_MORTY_PHY_START 0x00014000
+#define TASK_RICK_SOURCE_PHY_START 0x00010000
+#define TASK_MORTY_SOURCE_PHY_START 0x00014000
+
+#define TASK_RICK_DEST_PHY_START 0x01D00000
+#define TASK_MORTY_DEST_PHY_START 0x01D04000
+
 /* -------------------------------------------------------------------------- */
 /* En estas direcciones estan los códigos de todas las tareas. De aqui se
  * copiaran al destino indicado por TASK_<X>_PHY_START.
