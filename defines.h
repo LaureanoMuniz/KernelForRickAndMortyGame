@@ -25,9 +25,9 @@
 // X Columnas
 #define SIZE_M 80
 
-// Atributo de Interruption Gate
-#define ATTR_INT_GATE 0x8E00
-
+// Atributo de Interruption Gate 
+#define ATTR_INT_GATE_0 0x8E00
+#define ATTR_INT_GATE_3 0XEE00
 // EFLAGS
 #define EFLAG 0x202
 

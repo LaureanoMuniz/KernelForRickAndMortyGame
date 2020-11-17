@@ -32,9 +32,13 @@ idt_descriptor_t IDT_DESC = {sizeof(idt) - 1, (uint32_t)&idt};
 #define IDT_ENTRY(numero) \
     idt[numero].offset_15_0 = (uint16_t) ((uint32_t)(&_isr ## numero) & (uint32_t) 0xFFFF);   \
     idt[numero].segsel = (uint16_t) GDT_OFF_C0_DESC;                                          \
-    idt[numero].attr = (uint16_t) ATTR_INT_GATE;                                              \
+    idt[numero].attr = (uint16_t) ATTR_INT_GATE_0;                                              \
     idt[numero].offset_31_16 = (uint16_t) ((uint32_t)(&_isr ## numero) >> 16 & (uint32_t) 0xFFFF);
-
+#define IDT_ENTRY_SOFTWARE(numero) \
+    idt[numero].offset_15_0 = (uint16_t) ((uint32_t)(&_isr ## numero) & (uint32_t) 0xFFFF);   \
+    idt[numero].segsel = (uint16_t) GDT_OFF_C0_DESC;                                          \
+    idt[numero].attr = (uint16_t) ATTR_INT_GATE_3;                                              \
+    idt[numero].offset_31_16 = (uint16_t) ((uint32_t)(&_isr ## numero) >> 16 & (uint32_t) 0xFFFF);
 
 
 void idt_init() {
@@ -60,10 +64,12 @@ void idt_init() {
   IDT_ENTRY(18);
   IDT_ENTRY(19);
   IDT_ENTRY(20);
+
   IDT_ENTRY(32);
   IDT_ENTRY(33);
-  IDT_ENTRY(88);
-  IDT_ENTRY(89);
-  IDT_ENTRY(100);
-  IDT_ENTRY(123);
+
+  IDT_ENTRY_SOFTWARE(88);
+  IDT_ENTRY_SOFTWARE(89);
+  IDT_ENTRY_SOFTWARE(100);
+  IDT_ENTRY_SOFTWARE(123);
 }

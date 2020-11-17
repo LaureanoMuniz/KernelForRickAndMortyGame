@@ -20,6 +20,7 @@ extern mmu_init_task_dir
 extern inicializar_pantalla
 extern tss_init
 extern tss_idle_init
+extern sched_init
   
 BITS 16
 ;; Saltear seccion de datos
@@ -192,7 +193,8 @@ modo_protegido:
     call tss_idle_init
 
     ; Inicializar el scheduler
-    
+    call sched_init
+
     ; Inicializar la IDT
     xchg bx, bx
     call idt_init
@@ -215,7 +217,7 @@ modo_protegido:
 
     ; Saltar a la primera tarea: Idle
     xchg bx, bx
-    jmp GDT_SEL_TSS_IDLE:0
+    jmp GDT_SEL_TSS_IDLE:0 ;; esto se ejecuta?
     
     ; Ciclar infinitamente (por si algo sale mal...)
     mov eax, 0xFFFF

@@ -9,8 +9,8 @@
 
 BITS 32
 
-sched_task_offset:     dd 0xFFFFFFFF
-sched_task_selector:   dw 0xFFFF
+sched_task_offset:     dd 0x00000000
+sched_task_selector:   dw 0xFFFF  ;; Selector de Tarea Idle
 
 global _isr32
 global _isr33
@@ -75,6 +75,15 @@ _isr32:
     pushad
     call pic_finish1 
     call next_clock
+    xchg bx, bx 
+    ;;Scheduler
+    call sched_next_task
+    str cx
+    cmp ax, cx
+    je .fin
+        mov[sched_task_selector], ax
+        jmp far [sched_task_offset]
+    .fin:
     popad
     iret 
 ;; Rutina de atención del TECLADO
@@ -95,27 +104,23 @@ _isr33:
 _isr88:
     pushad
     mov eax, 0x58
-    call pic_finish1 
     popad
     iret 
 _isr89:
     pushad
     mov eax, 0x59
-    call pic_finish1 
     popad
     iret 
 
 _isr100:
     pushad
-    mov eax, 0x64
-    call pic_finish1 
+    mov eax, 0x64 
     popad
     iret 
 
 _isr123:
     pushad
     mov eax, 0x7b
-    call pic_finish1 
     popad
     iret 
 
