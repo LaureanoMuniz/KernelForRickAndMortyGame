@@ -42,3 +42,17 @@ uint16_t sched_next_task(void) {
   sched_state[next_task]=TASK_EJEC;
   return sched_idx_gdt[next_task]<<3; //selector de tarea
 }
+
+void sched_desalojar(){
+  uint32_t task_a_desalojar=0; 
+  while(sched_state[task_a_desalojar]!=TASK_EJEC){
+    task_a_desalojar++;
+  }
+  sched_state[task_a_desalojar] = TASK_DEAD;
+  if(task_a_desalojar<2){  //Rick o Morty
+    //Termina el juego
+  }
+  else{ //Mr M
+    //Unmapear Mr M
+  }
+}

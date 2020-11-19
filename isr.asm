@@ -25,6 +25,8 @@ extern pic_finish1
 extern sched_next_task
 extern print_exception
 extern print_digito
+extern sched_desalojar
+%define GDT_SEL_TSS_IDLE   21 << 3
 ;;
 ;; Definición de MACROS
 ;; -------------------------------------------------------------------------- ;;
@@ -35,7 +37,9 @@ _isr%1:
     mov eax, %1
     push eax
     call print_exception
-    jmp $
+    call sched_desalojar
+    jmp GDT_SEL_TSS_IDLE:0
+    jmp $ ; esto no hace falta
 
 %endmacro
 
@@ -81,7 +85,7 @@ _isr32:
     str cx
     cmp ax, cx
     je .fin
-        mov[sched_task_selector], ax
+        mov [sched_task_selector], ax
         jmp far [sched_task_offset]
     .fin:
     popad
@@ -105,23 +109,27 @@ _isr88:
     pushad
     mov eax, 0x58
     popad
+    jmp GDT_SEL_TSS_IDLE:0
     iret 
 _isr89:
     pushad
     mov eax, 0x59
     popad
+    jmp GDT_SEL_TSS_IDLE:0
     iret 
 
 _isr100:
     pushad
     mov eax, 0x64 
     popad
+    jmp GDT_SEL_TSS_IDLE:0
     iret 
 
 _isr123:
     pushad
     mov eax, 0x7b
     popad
+    jmp GDT_SEL_TSS_IDLE:0
     iret 
 
 ;; Funciones Auxiliares
