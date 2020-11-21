@@ -110,14 +110,16 @@ _isr32:
 _isr33:
     pushad
     in al, 0x60
-    cmp al, 0x15
-    push eax
     
+    push eax
+    call print_digito
+    pop eax
+    
+    cmp al, 0x15
     jne .seguir 
         call change_state_debug
     .seguir:
-    call print_digito
-    add esp,4
+    
     
     call pic_finish1
     popad
