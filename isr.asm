@@ -12,6 +12,7 @@ BITS 32
 sched_task_offset:     dd 0x00000000
 sched_task_selector:   dw 0xFFFF  ;; Selector de Tarea Idle
 
+
 global _isr32
 global _isr33
 global _isr88
@@ -26,6 +27,9 @@ extern sched_next_task
 extern print_exception
 extern print_digito
 extern sched_desalojar
+extern change_state_debug
+extern imprimir_debug
+extern copiar_pantalla
 %define GDT_SEL_TSS_IDLE   21 << 3
 ;;
 ;; Definición de MACROS
@@ -33,13 +37,24 @@ extern sched_desalojar
 %macro ISR 1
 global _isr%1
 
-_isr%1:    
+_isr%1:
+    pushad      ;pusheo registros generales    
+    mov ax, ds 
+    push eax
+    mov ax, es
+    push eax
+    mov ax, fs
+    push eax
+    mov ax, gs
+    push eax
     mov eax, %1
     push eax
-    call print_exception
+    call copiar_pantalla
+    call imprimir_debug ;Se rompe no hace falta arreglar pila?
+    ;call print_exception
     call sched_desalojar
     jmp GDT_SEL_TSS_IDLE:0
-    jmp $ ; esto no hace falta
+    ;jmp $ ; esto no hace falta
 
 %endmacro
 
@@ -95,9 +110,14 @@ _isr32:
 _isr33:
     pushad
     in al, 0x60
+    cmp al, 0x15
+    jne .seguir 
+        call change_state_debug
+    .seguir:
     push eax
     call print_digito
     add esp,4
+    
     call pic_finish1
     popad
     iret

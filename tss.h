@@ -60,6 +60,7 @@ extern tss_t tss_rick;
 
 void tss_init(void);
 void tss_idle_init(void);
-void tss_init_task(paddr_t);
+void tss_init_task(int gdt_idx, tss_t* tss, paddr_t kernel_page, 
+                    paddr_t cr3, vaddr_t task_code, uint32_t pages);
 void define_base_tss(int , tss_t*);
 #endif //  __TSS_H__

@@ -15,12 +15,19 @@
 #define TASK_EJEC 2
 #define sched_max_task 22
 
-uint32_t turno;
-uint32_t last_task[2];
+typedef struct scheduler_t{
+  uint32_t turno;
+  uint32_t last_task[2];
+  uint32_t state[sched_max_task];
+  uint32_t idx_gdt[sched_max_task];
+}scheduler;
 
-void sched_init();
-uint16_t sched_next_task();
+extern scheduler sched;
+extern uint32_t debug_state;
 
-extern uint32_t sched_state[sched_max_task]; // 0 -> muerta o no cargada, 1 -> ready, 2-> ejecutando 
-extern uint32_t sched_idx_gdt[sched_max_task]; // indice de la tarea i en la gdt
+
+void sched_init(void);
+uint16_t sched_next_task(void);
+void change_state_debug(void);
+
 #endif //  __SCHED_H__

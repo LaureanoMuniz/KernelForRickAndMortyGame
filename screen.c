@@ -7,7 +7,8 @@
 */
 
 #include "screen.h"
-
+#include "i386.h"
+#include "sched.h"
 void print(const char* text, uint32_t x, uint32_t y, uint16_t attr) {
   ca(*p)[VIDEO_COLS] = (ca(*)[VIDEO_COLS])VIDEO; // magia
   int32_t i;
@@ -124,9 +125,9 @@ void inicializar_pantalla(){ // checkear si hace falta dejar el espacio en negro
 }
 
 void print_exception(uint32_t excepcion){
-  print("EXCEPCION ",0,0,C_FG_WHITE|C_BG_BLACK);
+  print("EXCEPCION ",21,3,C_FG_WHITE|C_BG_BLACK);
   uint32_t tam=1+(excepcion>=10);
-  print_dec(excepcion,tam,10,0,C_FG_WHITE|C_BG_BLACK);
+  print_dec(excepcion,tam,31,3,C_FG_WHITE|C_BG_BLACK);
 }
 
 //void print(const char* text, uint32_t x, uint32_t y, uint16_t attr) 
@@ -149,4 +150,89 @@ void print_digito(uint8_t digito){
  }
 
 }
+void imprimir_debug(uint32_t num_excepcion, uint8_t gs, uint8_t fs, uint8_t es, uint8_t ds, 
+                    uint32_t edi, uint32_t esi, uint32_t ebp, uint32_t esp_kernel, 
+                    uint32_t ebx, uint32_t edx, uint32_t ecx, uint32_t eax,
+                    uint32_t err,uint32_t eip, uint8_t cs, uint32_t eflags, uint32_t esp, uint8_t ss){
 
+  esp_kernel++; //para que haga algo
+  debug_state=2; 
+  //  Imprime bloque negro
+  uint32_t initFila = 1;
+  uint32_t initCol  = 20;
+  uint32_t sizeFila = 40;
+  uint32_t sizeCol  = 40;
+  uint32_t character = ' ';
+  uint32_t attr = C_BG_BLACK;
+  screen_draw_box(initFila, initCol, sizeFila, sizeCol, character, attr);
+
+  // Imprimir error 
+  print_exception(num_excepcion);
+  uint32_t id_tarea = sched.last_task[sched.turno];
+  print_hex(id_tarea, 3, 56, 3, C_FG_LIGHT_GREEN | C_BG_BLACK);
+
+  // Imprimir los el nombre de los registros y su contenido.
+  char* columna_izq[15] = {"eax","ebx","ecx", "edx","esi", "edi", "ebp", "esp",  "eip", "cs", "ds", "es", "fs", "gs", "ss"};
+  uint32_t columna_izq2[15] = {eax, ebx, ecx, edx, esi, edi, ebp, esp, eip, cs, ds, es, fs, gs, ss};
+  for (int i = 0; i < 15; i++){
+    print_hex(columna_izq2[i], 8, 26, 7+i*2, C_FG_LIGHT_GREEN | C_BG_BLACK);
+
+    if(i < 9){
+    print(columna_izq[i], 22, 7+i*2, C_FG_WHITE| C_BG_BLACK);}
+    else{
+    print(columna_izq[i], 23, 7+i*2, C_FG_WHITE| C_BG_BLACK);
+    }
+  }
+ //Imprimir flags y sus contenidos
+  print("eflags", 22, 39, C_FG_WHITE| C_BG_BLACK);
+  print_hex(eflags, 8, 29, 39, C_FG_LIGHT_GREEN | C_BG_BLACK);
+
+//Cargar registros de control con rcrx()
+  uint32_t cr0 = rcr0();
+  uint32_t cr2 = rcr2();
+  uint32_t cr3 = rcr3();
+  uint32_t cr4 = rcr4();
+
+//Imprimir registros de control y contenido
+  char* columna_der[5] = {"cr0", "cr2", "cr3","cr4","err"};
+  uint32_t columna_der2[5] = {cr0, cr2, cr3, cr4, err};
+    for (int i = 0; i < 5; i++){
+    print_hex(columna_der2[i], 8, 51, 8+i*2, C_FG_LIGHT_GREEN | C_BG_BLACK);
+    print(columna_der[i], 47 , 8+i*2, C_FG_WHITE| C_BG_BLACK);
+  }
+ 
+
+// Imprimir stack y contenido 
+  //uint32_t* stack = (uint32_t*)esp;
+  print("stack", 40 , 20, C_FG_WHITE| C_BG_BLACK);
+  print_hex(0, 8, 40, 22, C_FG_LIGHT_GREEN | C_BG_BLACK);
+  print_hex(0, 8, 40, 24, C_FG_LIGHT_GREEN | C_BG_BLACK);
+  print_hex(0, 8, 40, 26, C_FG_LIGHT_GREEN | C_BG_BLACK);
+
+ // Imprimir backtrace y contenido 
+  print("backtrace", 40 , 28, C_FG_WHITE| C_BG_BLACK);
+  print_hex(0, 8, 40, 30, C_FG_LIGHT_GREEN | C_BG_BLACK);
+  print_hex(0, 8, 40, 32, C_FG_LIGHT_GREEN | C_BG_BLACK);
+  print_hex(0, 8, 40, 34, C_FG_LIGHT_GREEN | C_BG_BLACK);
+
+
+}
+void copiar_pantalla(){
+  ca(*p)[VIDEO_COLS] = (ca(*)[VIDEO_COLS])VIDEO;
+  for(int i=0;i<50;i++){
+    for(int j=0;j<80;j++){
+      copia_de_pantalla[i][j].a=p[i][j].a;
+      copia_de_pantalla[i][j].c=p[i][j].c;
+    }
+  }
+}
+void devolver_pantalla(){
+  ca(*p)[VIDEO_COLS] = (ca(*)[VIDEO_COLS])VIDEO;
+  for(int i=0;i<50;i++){
+    for(int j=0;j<80;j++){
+      p[i][j].a=copia_de_pantalla[i][j].a;
+      p[i][j].c=copia_de_pantalla[i][j].c;
+    }
+  }
+
+}
