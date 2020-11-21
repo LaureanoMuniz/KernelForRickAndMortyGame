@@ -9,6 +9,8 @@
 #include "screen.h"
 #include "i386.h"
 #include "sched.h"
+#include "game.h"
+
 void print(const char* text, uint32_t x, uint32_t y, uint16_t attr) {
   ca(*p)[VIDEO_COLS] = (ca(*)[VIDEO_COLS])VIDEO; // magia
   int32_t i;
@@ -133,9 +135,9 @@ void print_exception(uint32_t excepcion){
 //void print(const char* text, uint32_t x, uint32_t y, uint16_t attr) 
 void printLU(){
 
-  print("498/19",20,25,C_FG_WHITE|C_BG_LIGHT_GREEN);
-  print("460/19",20,26,C_FG_WHITE|C_BG_LIGHT_GREEN);
-  print("577/18",20,27,C_FG_WHITE|C_BG_LIGHT_GREEN);
+  print("498/19",20,25,C_FG_WHITE|C_BG_GREEN);
+  print("460/19",20,26,C_FG_WHITE|C_BG_GREEN);
+  print("577/18",20,27,C_FG_WHITE|C_BG_GREEN);
 }
 
 void print_digito(uint8_t digito){
@@ -235,4 +237,11 @@ void devolver_pantalla(){
     }
   }
 
+}
+
+void colocar_Megasemillas_Pantalla(){
+  for(int i=0;i<CANT_MAX_MEGASEMILLAS;i++){
+    print("S",juego.posicion_Megasemillas[i].y, juego.posicion_Megasemillas[i].x+1, 
+            0x2E);
+  }
 }

@@ -45,4 +45,5 @@ void copiar_pantalla(void);
 
 void devolver_pantalla(void);
 
+void colocar_Megasemillas_Pantalla(void);
 #endif //  __SCREEN_H__

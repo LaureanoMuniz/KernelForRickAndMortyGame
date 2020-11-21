@@ -10,6 +10,7 @@
 #include "tss.h"
 #include "mmu.h"
 #include "screen.h"
+
 scheduler sched;
 uint32_t debug_state=0;
 void sched_init(void) {

@@ -21,6 +21,7 @@ extern inicializar_pantalla
 extern tss_init
 extern tss_idle_init
 extern sched_init
+extern game_init
   
 BITS 16
 ;; Saltear seccion de datos
@@ -217,6 +218,8 @@ modo_protegido:
 
     ; Saltar a la primera tarea: Idle
     xchg bx, bx
+    call game_init
+    
     jmp GDT_SEL_TSS_IDLE:0 ;; esto se ejecuta?
     
     ; Ciclar infinitamente (por si algo sale mal...)
