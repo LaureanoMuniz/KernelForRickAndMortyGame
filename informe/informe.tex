@@ -121,7 +121,7 @@
 
 \section{Introducción}
 \justify
-El objetivo de este trabajo práctico es aplicar gradualmente los conceptos de \textit{System Programming} vistos en las clases teóricas y prácticas, mediante la implementación de una serie de ejercicios que, inspirados en la serie \textit{Rick y Morty}, en conjunto conformarán un kernel o un pequeño sistema operativo.
+El objetivo de este trabajo práctico es aplicar gradualmente los conceptos de \textit{System Programming} vistos en las clases teóricas y prácticas, mediante la implementación de una serie de ejercicios que, inspirados en la serie \textit{Rick y Morty}, en conjunto conformarán un kernel o un pequeño sistema operativo. 
 
 
 
@@ -144,11 +144,29 @@ Siguiendo lo indicado en el primer item, definimos a partir del índice 10, 4 de
 
 
 \justify
-Realizando lo pedido en el item b, pasamos a modo protegido. Para poder hacer esto modificamos el archivo kernel.asm, allí deshablitamos las interrupciones, cargamos en el registro GDTR la estructura \textbf{gdt_descriptor_t} y modificamos el ultimo bit del registro de control CR0, es decir, seteamos en 1 el bit de \textit{Protection Enable}. Posteriormente, escribimos el código necesario para saltar efectivamente a modo protegido. Debido a que este salto se consigue haciendo un \textit{far jump} a la próxima instrucción, designamos una etiqueta llamada \textbf{modo_protegido} a partir de la cual obtendremos el offset, mientras que como selector utilizamos el correspondiente al segmento de código de nivel 0. Además, seteamos la pila del kernel en la dirección 0x25000, es decir, en la base de la pila. Una vez que pasamos a modo protegido, cargamos correctamente los selectores de segmento, en los registros ds, es, fs, gs, ss, usando como registro auxiliar ax.
+Realizando lo pedido en el item b, pasamos a modo protegido. Para poder hacer esto modificamos el archivo kernel.asm, allí deshablitamos las interrupciones, cargamos en el registro GDTR la estructura \textbf{gdt_descriptor_t} y modificamos el ultimo bit del registro de control CR0, es decir, seteamos en 1 el bit de \textit{Protection Enable}. Posteriormente, escribimos el código necesario para saltar efectivamente a modo protegido. Debido a que este salto se consigue haciendo un \textit{far jump} a la próxima instrucción, designamos una etiqueta llamada \textbf{modo_protegido} a partir de la cual obtendremos el offset, mientras que como selector utilizamos el correspondiente al segmento de código de nivel 0. Además, seteamos la pila del kernel en la dirección 0x25000, es decir, en la base de la pila. Una vez que pasamos a modo protegido, cargamos correctamente los selectores de segmento, en los registros ds, es, fs, gs, ss, usando como registro auxiliar ax.
+
 
 \justify
-Seguidamente, definimos otra entrada en la GDT destinada a un segmento de vídeo. A diferencia de los cuatro segmentos anteriores, la base de este segmento es distinta de 0, por lo que los campos de la base fueron ser completados con el valor 0x000B8000.  
+Seguidamente, definimos otra entrada en la GDT destinada a un segmento de vídeo de nivel 0 (DPL = 0). A diferencia de los cuatro segmentos anteriores, la base de este segmento es distinta de 0, por lo que los campos de la base fueron ser completados con el valor 0x000B8000. Como la pantalla es de 80x50 y como cada pixel ocupa 2 bytes, el límite de este segmento es 0x01F3F. Como este límite entra en 20 bits, el bit de granularidad de este descriptor queda en 0. Además, al ser un segmento de datos de lectura y escritura el tipo es 0x02 y el bit de s queda seteado en 1. Como en las entradas anteriores, los bits de AVL y L quedan en 0, mientras que los bits de present y D/B quedan en 1.  
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.8]{img/DescriptorVideo.pdf}
+	\caption{Esquema del descriptor de segmento de video.}
+\end{figure}
+
+\justify
+Para finalizar este ejercicio, realizamos un rutina encargada de limpiar la pantalla, y pintar el área del mapa de color verde, junto con las barras de los jugadores Rick y Morty. Inicialmente, esta rutina fue implementada en ASM dentro del archivo \textit{kernel.asm}, para corroborar el correcto funcionamiento del acceso al segmento de vídeo, pero luego fue reemplazada por la función en C  "inicializar_pantalla" que se encuentra en el archivo \textit{screen.c}. La pantalla se ve de la siguiente manera:
+
+%Acá va la imagen de la pantalla.  
+
 \subsection{Ejercicio 2}
+\justify
+Para realizar este ejercicio se modificaron los archivos \textit{idt.c} e \textit{idt.h}. Se completaron las entradas necesarias en la IDT para todas las rutinas de exepciones del procesador. Se definieron las entradas de la IDT para las excepciones y para las interrupciones de software (IDT_ENTRY e IDT_ENTRY_SOFTWARE). En el caso de las entradas de la IDT para las exepciones, 
+
+
+
 \subsection{Ejercicio 3}
 \subsection{Ejercicio 4}
 \subsection{Ejercicio 5}
