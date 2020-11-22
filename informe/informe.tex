@@ -104,7 +104,7 @@
 \integrante{Luciana Gorosito}{577/18}{lugorosito0@gmail.com}
 
 \maketitle
-\newpage
+
 
 \thispagestyle{empty}
 \vfill
@@ -120,19 +120,34 @@
 \newpage
 
 \section{Introducción}
+\justify
+El objetivo de este trabajo práctico es aplicar gradualmente los conceptos de \textit{System Programming} vistos en las clases teóricas y prácticas, mediante la implementación de una serie de ejercicios que, inspirados en la serie \textit{Rick y Morty}, en conjunto conformarán un kernel o un pequeño sistema operativo.
 
 
 
 \section{Desarrrollo}
+\justify
+A continuación detallamos las implementaciones de los ejercicios del trabajo práctico.
 
 \subsection{Ejercicio 1}
+\justify
+Para la realización de este ejercicio analizamos las estructuras \textbf{gdt_entry_t} y \textbf{gdt_descriptor_t} definidas por la cátedra. En esta implementación, la Tabla de Descriptores Globales(GDT) es un arreglo de  \textbf{gdt_entry_t} y su descriptor, que luego cargaremos en GDTR, es del tipo \textbf{gdt_descriptor_t}.\par
+\justify
+Siguiendo lo indicado en el primer item, definimos a partir del índice 10, 4 descriptores de segmento en la GDT utilizando la estructura \textbf{gdt_entry_t}, atendiendo a las propiedades particulares de cada segmento. Así definimos las entradas de dos segmentos de código de nivel
+0 y 3 y de dos segmentos de datos, también de nivel 0 y 3. Puesto que estos segmentos deben direccionar los primeros 201 MB de memoria establecimos en todos el bit de G en 1, y definimos su base en 0x00000000 y su limite en 0x00C8FF. Además, como son segmentos de código o datos de 32 bits, los bit S y D/B se encuentran seteados en 1 y el bit L en 0. Los bits de DPL de cada uno están seteados en 0 o en 3 de acuerdo con el nivel de privilegio que le corresponda. Por último, los bits de tipo están seteados como 0xA en caso de tratarse de un segmento de código y como 0x2 en caso de tratarse de un segmento de datos. En todos, el bit P se setea en 1 para reflejar que los segmentos están presentes. En el caso del bit de AVL, como es un bit reservado lo seteamos en 0.
 
-Para la realización de este ejercicio analizamos las estructuras \textbf{gdt_entry_t} y \textbf{gdt_descriptor_t} definidas por la cátedra. En esta implementación, la Tabla de Descriptores Globales(GDT) es un arreglo de  \textbf{gdt_entry_t} y su descriptor, que luego cargaremos en GDTR, es \textbf{gdt_descriptor_t}.\par
-Siguiendo lo indicado en el primer item, definimos a partir del índice 10, 4 descriptores de segmento en la GDT utilizando la estructura \textbf{gdt_entry_t} atendiendo a las propiedades particulares de cada segmento. Puesto que estos segmentos deben direccionar los primeros 201 MB de memoria establecimos en todos el bit de G en 1, y definimos su base en 0x00000000h y su limite en 0x00C8FFh. Además, estos 4 son segmentos de código o datos de 32 bits por lo que el bit S se encuentra seteado en 1, el de D/B se encuentra seteado en 1 y el bit L en 0. El bit de DPL de cada uno está seteado en 0 o en 3 de acuerdo con el nivel de privilegio que le corresponda. Por último, los bits de tipo están seteados como 0xAh en caso de tratarse de un segmento de código y como 0x2h en caso de tratarse de un segmento de datos.\par
-%%No se habla del bit P
-%%Opcionalmente se puede poner una imagen con los bits de un descripto de segmento del manual.
-Para poder pasar a modo protegido, en el kernel deshablitamos las interrupciones, cargamos en el registro GDTR la estructura \textbf{gdt_descriptor_t} y modificamos el ultimo bit del registro de control CR0, es decir, seteamos en 1 el bit de \textit{Protection Enable}. Posteriormente, escribimos el código necesario para saltar efectivamente a modo protegido. Debido a que este salto se consigue haciendo un \textit{far jump} a la próxima instrucción, designamos una etiqueta llamada \textbf{modo_protegido} a partir de la cual obtendremos el offset, mientras que como selector utilizamos el correspondiente al segmento de código de nivel 0.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.8]{img/GDTdescriptor.pdf}
+	\caption{Esquema general de un descriptor de la GDT para los 4 segmentos.}
+\end{figure}
 
+
+\justify
+Realizando lo pedido en el item b, pasamos a modo protegido. Para poder hacer esto modificamos el archivo kernel.asm, allí deshablitamos las interrupciones, cargamos en el registro GDTR la estructura \textbf{gdt_descriptor_t} y modificamos el ultimo bit del registro de control CR0, es decir, seteamos en 1 el bit de \textit{Protection Enable}. Posteriormente, escribimos el código necesario para saltar efectivamente a modo protegido. Debido a que este salto se consigue haciendo un \textit{far jump} a la próxima instrucción, designamos una etiqueta llamada \textbf{modo_protegido} a partir de la cual obtendremos el offset, mientras que como selector utilizamos el correspondiente al segmento de código de nivel 0. Además, seteamos la pila del kernel en la dirección 0x25000, es decir, en la base de la pila. Una vez que pasamos a modo protegido, cargamos correctamente los selectores de segmento, en los registros ds, es, fs, gs, ss, usando como registro auxiliar ax.
+
+\justify
+Seguidamente, definimos otra entrada en la GDT destinada a un segmento de vídeo. A diferencia de los cuatro segmentos anteriores, la base de este segmento es distinta de 0, por lo que los campos de la base fueron ser completados con el valor 0x000B8000.  
 \subsection{Ejercicio 2}
 \subsection{Ejercicio 3}
 \subsection{Ejercicio 4}
