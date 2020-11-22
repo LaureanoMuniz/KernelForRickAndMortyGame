@@ -31,6 +31,9 @@
 // EFLAGS
 #define EFLAG 0x202
 
+//Puntaje Semilla
+#define PUNTAJE_SEMILLA 425
+
 #define RPL_3 3
 /* Indices en la gdt */
 /* -------------------------------------------------------------------------- */
@@ -47,7 +50,7 @@
 #define GDT_IDX_TSS_MORTY 23
 
 
-#define GDT_COUNT         35
+#define GDT_COUNT         50  //Puede ser 43
 /* Offsets en la gdt */
 /* -------------------------------------------------------------------------- */
 #define GDT_OFF_NULL_DESC (GDT_IDX_NULL_DESC << 3)
@@ -75,6 +78,7 @@
 
 // direccion virtual del codigo
 #define TASK_CODE_VIRTUAL 0x01D00000
+#define NEW_TASKS_VIRTUAL_START 0x08000000  
 #define TASK_PAGES        4
 
 /* Direcciones fisicas de codigos */
@@ -84,6 +88,10 @@
 
 #define TASK_RICK_DEST_PHY_START 0x01D00000
 #define TASK_MORTY_DEST_PHY_START 0x01D04000
+
+#define MAP_PHY_START 0x00400000
+
+
 
 /* -------------------------------------------------------------------------- */
 /* En estas direcciones estan los códigos de todas las tareas. De aqui se

@@ -10,6 +10,7 @@
 #include "tss.h"
 #include "mmu.h"
 #include "screen.h"
+#include "i386.h"
 
 scheduler sched;
 uint32_t debug_state=0;
@@ -22,19 +23,11 @@ void sched_init(void) {
   }
   sched.last_task[0]=0; //ultima tarea de Rick
   sched.last_task[1]=1; //ultima tarea de Morty
-  sched.state[0]=TASK_READY; // Tarea Rick lista
-  sched.state[1]=TASK_READY; // Tarea Morty lista
-  tss_init_task(GDT_IDX_TSS_RICK, &tss_rick, mmu_next_free_kernel_page(), 
-                mmu_init_task_dir(TASK_RICK_DEST_PHY_START, TASK_RICK_SOURCE_PHY_START, TASK_PAGES), 
-                TASK_CODE_VIRTUAL, TASK_PAGES);
-  tss_init_task(GDT_IDX_TSS_MORTY, &tss_morty, mmu_next_free_kernel_page(), 
-                mmu_init_task_dir(TASK_MORTY_DEST_PHY_START, TASK_MORTY_SOURCE_PHY_START, TASK_PAGES), 
-                TASK_CODE_VIRTUAL, TASK_PAGES);
   sched.turno = 1; //Proximo turno es de Rick
 }
 
 uint16_t sched_next_task(void) {
-  if(sched.state[0] == TASK_DEAD || sched.state[1] == TASK_DEAD){
+  if(sched.state[0] == TASK_DEAD || sched.state[1] == TASK_DEAD || debug_state == 2){
     return GDT_IDX_TSS_IDLE<<3; //selector de tarea
   }
   if(sched.state[sched.last_task[sched.turno]]==TASK_EJEC){
@@ -58,11 +51,20 @@ void sched_desalojar(){
   }
   sched.state[task_a_desalojar] = TASK_DEAD;
   if(task_a_desalojar<2){  //Rick o Morty
-    //Termina el juego
+    //Termino el juego
   }
   else{ //Mr M
-    //Unmapear Mr M
+    //Borrar del mapa
+    print(" ",juego.posiciones_Mr_M[task_a_desalojar-2].x, 
+          juego.posiciones_Mr_M[task_a_desalojar-2].y+1, C_BG_GREEN);
+      //Unmapear Mr M
+    uint32_t slot_tarea = (task_a_desalojar-2)/2;
+    vaddr_t virtual_Mr_M = NEW_TASKS_VIRTUAL_START + slot_tarea*(PAGE_SIZE*2);
+    mmu_unmap_page(rcr3(), virtual_Mr_M);
+    mmu_unmap_page(rcr3(), virtual_Mr_M + PAGE_SIZE);
+  
   }
+  saltar_idle();
 }
 
 void change_state_debug(){
@@ -76,4 +78,5 @@ void change_state_debug(){
     devolver_pantalla();
     debug_state=1;
   }
+  
 }

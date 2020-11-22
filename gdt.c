@@ -8,6 +8,8 @@
 
 #include "gdt.h"
 #include "tss.h"
+
+
 gdt_entry_t gdt[GDT_COUNT] = {
     /* Descriptor nulo*/
     /* Offset = 0x00 */
@@ -166,3 +168,19 @@ gdt_entry_t gdt[GDT_COUNT] = {
 };
 
 gdt_descriptor_t GDT_DESC = {sizeof(gdt) - 1, (uint32_t)&gdt};
+
+gdt_entry_t gdt_tarea_Mr_M = {
+        .limit_15_0 = sizeof(tss_t)-1, //Same arriba
+        .limit_19_16 = 0x00,
+        .base_15_0 = 0x0000,
+        .base_23_16 = 0x00,
+        .base_31_24 = 0x00,
+        .type = 0x09,
+        .s = 0,
+        .dpl = 0,
+        .p = 1,
+        .avl = 0,
+        .l = 0,
+        .db = 0,
+        .g = 0,
+};

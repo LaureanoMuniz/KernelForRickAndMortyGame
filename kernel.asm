@@ -212,13 +212,14 @@ modo_protegido:
     ; Cargar tarea inicial
     mov ax, GDT_SEL_TSS_INIT ; muevo selector de segmento de tss_init
     ltr ax
-
+    
+    xchg bx, bx
+    call game_init
     ; Habilitar interrupciones
     sti 
 
     ; Saltar a la primera tarea: Idle
-    xchg bx, bx
-    call game_init
+    
     
     jmp GDT_SEL_TSS_IDLE:0 ;; esto se ejecuta?
     

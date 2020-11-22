@@ -30,6 +30,8 @@ tss_t tss_idle = {
 };
 tss_t tss_rick;
 tss_t tss_morty;
+tss_t tss_Mr_M[CANT_MAX_MR_M];
+
 void define_base_tss(int index, tss_t* task){
   gdt[index].base_15_0 = (uint32_t) task;
   gdt[index].base_23_16 = (uint32_t) task >> 16;

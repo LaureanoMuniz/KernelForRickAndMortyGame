@@ -30,6 +30,7 @@ extern sched_desalojar
 extern change_state_debug
 extern imprimir_debug
 extern copiar_pantalla
+extern servicio_meeseks
 %define GDT_SEL_TSS_IDLE   21 << 3
 ;;
 ;; Definición de MACROS
@@ -53,9 +54,7 @@ _isr%1:
     call imprimir_debug ;Se rompe no hace falta arreglar pila?
     ;call print_exception
     call sched_desalojar
-    jmp GDT_SEL_TSS_IDLE:0
-    ;jmp $ ; esto no hace falta
-
+    
 %endmacro
 
 
@@ -128,11 +127,27 @@ _isr33:
 ;; Rutinas de atención de las SYSCALLS
 ;; -------------------------------------------------------------------------- ;;
 
+;uint32_t servicio_meeseks(uint32_t code, uint32_t x, uint32_t y)
 _isr88:
-    pushad
-    mov eax, 0x58
-    popad
+    push edx
+    push esp
+    push ebp
+    push esi
+    push edi
+
+    ;mov eax, 0x58
+    push ecx
+    push ebx
+    push eax
+    call servicio_meeseks
+    add esp, 12
     jmp GDT_SEL_TSS_IDLE:0
+
+    pop edi
+    pop esi
+    pop ebp
+    pop esp
+    pop edx
     iret 
 _isr89:
     pushad
@@ -172,3 +187,8 @@ next_clock:
                 print_text_pm ebx, 1, 0x0f, 49, 79
                 popad
         ret
+
+global saltar_idle
+
+saltar_idle:
+    jmp GDT_SEL_TSS_IDLE:0

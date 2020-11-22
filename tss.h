@@ -11,6 +11,7 @@
 
 #include "gdt.h"
 #include "types.h"
+#include "game.h"
 
 typedef struct str_tss {
   uint16_t ptl;
@@ -57,7 +58,7 @@ extern tss_t tss_initial;
 extern tss_t tss_idle;
 extern tss_t tss_morty;
 extern tss_t tss_rick;
-
+extern tss_t tss_Mr_M[CANT_MAX_MR_M];
 void tss_init(void);
 void tss_idle_init(void);
 void tss_init_task(int gdt_idx, tss_t* tss, paddr_t kernel_page, 

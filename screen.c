@@ -241,7 +241,22 @@ void devolver_pantalla(){
 
 void colocar_Megasemillas_Pantalla(){
   for(int i=0;i<CANT_MAX_MEGASEMILLAS;i++){
-    print("S",juego.posicion_Megasemillas[i].y, juego.posicion_Megasemillas[i].x+1, 
+    print("S",juego.posicion_Megasemillas[i].x, juego.posicion_Megasemillas[i].y+1, 
             0x2E);
   }
+}
+
+void actualizar_puntajes(){
+  uint32_t numero = juego.puntajes[0];
+  uint32_t size = 8;
+  uint32_t x = 6;
+  uint32_t y = 44;
+  uint16_t atr = C_FG_WHITE;
+  print_dec(numero, size, x, y, atr);
+  numero = juego.puntajes[1];
+  size = 8;
+  x = 66;
+  y = 44;
+  atr = C_FG_WHITE;
+  print_dec(numero, size, x, y, atr);      
 }
