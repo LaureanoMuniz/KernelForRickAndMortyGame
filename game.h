@@ -26,9 +26,12 @@ typedef struct s_juego{
   pos posiciones_Mr_M[CANT_MAX_MR_M];
   pos posicion_Megasemillas[CANT_MAX_MEGASEMILLAS];
   uint32_t cant_Megasemilla;
-  uint32_t puntajes[2];
+  uint32_t puntajes[2];         // 0 es Rick, 1 es Morty
   vaddr_t page_stack0_Mr_M[CANT_MAX_MR_M];
   uint8_t color_players[2];
+  uint32_t max_move_Mr_M[CANT_MAX_MR_M];
+  uint32_t uso_portal_gun[CANT_MAX_MR_M];
+  uint32_t cr3_players[2];
 }juego_type;
 
 extern juego_type juego;
@@ -36,5 +39,10 @@ extern juego_type juego;
 void game_init(void);
 void colocar_Megasemillas(void);
 uint32_t servicio_meeseks(uint32_t code, uint32_t x, uint32_t y);
-
+uint32_t servicio_move(int32_t x, int32_t y);
+uint32_t maximo(uint32_t n, uint32_t m);
+int8_t servicio_look_x();
+int8_t servicio_look_y();
+int32_t calcular_distancia(int32_t x1, int32_t y1, int32_t x2, int32_t y2);
+void servicio_portal_gun();
 #endif //  __GAME_H__

@@ -123,7 +123,25 @@ void inicializar_pantalla(){ // checkear si hace falta dejar el espacio en negro
   x = 66;
   y = 44;
   atr = C_FG_WHITE;
-  print_hex(numero, size, x, y, atr);              
+  print_hex(numero, size, x, y, atr);
+
+  print("R",17,42, C_FG_LIGHT_RED | C_BG_BLACK);
+   //print(" ",17,44,C_FG_WHITE | C_BG_BLACK);
+
+  print("M",62,42, C_FG_LIGHT_BLUE | C_BG_BLACK);
+   //print(" ",62,44,C_FG_WHITE | C_BG_BLACK);
+
+
+  // Printeo los meeseeks de Rick.
+  for(uint32_t i = 0; i<10; i++){
+    print_dec(i,2,21+i*4,42, C_FG_LIGHT_RED | C_BG_BLACK);
+    //print(" ",21+i*4,43,C_FG_WHITE | C_BG_BLACK);
+  }
+  // Printeo los meeseeks de Morty
+  for(uint32_t i = 0; i<10; i++){
+    print_dec(i,2,21+i*4,45,C_FG_LIGHT_BLUE | C_BG_BLACK);
+    //print(" ",21+i*4,46,C_FG_WHITE | C_BG_BLACK);
+  }              
 }
 
 void print_exception(uint32_t excepcion){
@@ -239,13 +257,6 @@ void devolver_pantalla(){
 
 }
 
-void colocar_Megasemillas_Pantalla(){
-  for(int i=0;i<CANT_MAX_MEGASEMILLAS;i++){
-    print("S",juego.posicion_Megasemillas[i].x, juego.posicion_Megasemillas[i].y+1, 
-            0x2E);
-  }
-}
-
 void actualizar_puntajes(){
   uint32_t numero = juego.puntajes[0];
   uint32_t size = 8;
@@ -259,4 +270,28 @@ void actualizar_puntajes(){
   y = 44;
   atr = C_FG_WHITE;
   print_dec(numero, size, x, y, atr);      
+}
+
+void actualizar_pantalla(){
+    //Pinto fondo de verde
+    uint32_t initFila = 1;
+    uint32_t initCol  = 0;
+    uint32_t sizeFila = 40;
+    uint32_t sizeCol  = 80;
+    uint8_t character = ' ';
+    uint8_t attr = C_BG_LIGHT_GREEN;
+    screen_draw_box(initFila, initCol, sizeFila, sizeCol, character, attr);
+    //Coloco las semillas
+    for(int i=0;i<CANT_MAX_MEGASEMILLAS;i++){
+      if(juego.posicion_Megasemillas[i].x != (uint32_t)-1){ // Si la semilla esta la pongo en pantalla
+        print("S",juego.posicion_Megasemillas[i].x, juego.posicion_Megasemillas[i].y+1, 0x2E);
+      }
+    }
+
+    for(int i=0;i<CANT_MAX_MR_M;i++){
+      if(sched.state[i+2] != TASK_DEAD){
+        print("K", juego.posiciones_Mr_M[i].x, juego.posiciones_Mr_M[i].y+1, juego.color_players[i%2]);
+      }
+    }
+    actualizar_puntajes();
 }

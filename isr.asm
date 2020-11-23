@@ -31,6 +31,12 @@ extern change_state_debug
 extern imprimir_debug
 extern copiar_pantalla
 extern servicio_meeseks
+extern debug_state
+extern actualizar_pantalla
+extern servicio_move
+extern servicio_look_x
+extern servicio_look_y
+extern servicio_portal_gun
 %define GDT_SEL_TSS_IDLE   21 << 3
 ;;
 ;; Definición de MACROS
@@ -92,8 +98,13 @@ ISR 20
 _isr32:
     pushad
     call pic_finish1 
+    cmp DWORD [debug_state], 2
+    je .fin
+
     call next_clock
-    xchg bx, bx 
+    ;xchg bx, bx 
+    call actualizar_pantalla
+    
     ;;Scheduler
     call sched_next_task
     str cx
@@ -102,6 +113,8 @@ _isr32:
         mov [sched_task_selector], ax
         jmp far [sched_task_offset]
     .fin:
+
+
     popad
     iret 
 ;; Rutina de atención del TECLADO
@@ -140,7 +153,9 @@ _isr88:
     push ebx
     push eax
     call servicio_meeseks
-    add esp, 12
+    add esp, 4
+    pop ebx
+    pop ecx
     jmp GDT_SEL_TSS_IDLE:0
 
     pop edi
@@ -151,23 +166,58 @@ _isr88:
     iret 
 _isr89:
     pushad
-    mov eax, 0x59
-    popad
+    ;mov eax, 0x59
+    call servicio_portal_gun
     jmp GDT_SEL_TSS_IDLE:0
+    popad
     iret 
 
 _isr100:
-    pushad
-    mov eax, 0x64 
-    popad
+    push edx
+    push esp
+    push ebp
+    push esi
+    push edi
+    push ecx
+
+    ;mov eax, 0x64 
+    call servicio_look_y
+    mov ebx, eax
+    call servicio_look_x
     jmp GDT_SEL_TSS_IDLE:0
+    
+    pop ecx
+    pop edi
+    pop esi
+    pop ebp
+    pop esp
+    pop edx
     iret 
 
 _isr123:
-    pushad
-    mov eax, 0x7b
-    popad
+    push edx
+    push esp
+    push ebp
+    push esi
+    push edi
+    push ecx
+
+    ;mov eax, 0x7b
+    push ebx
+    push eax
+    call servicio_move
+    add esp, 4
+    pop ebx
+    
     jmp GDT_SEL_TSS_IDLE:0
+    
+    
+    pop ecx
+    pop edi
+    pop esi
+    pop ebp
+    pop esp
+    pop edx
     iret 
 
 ;; Funciones Auxiliares
