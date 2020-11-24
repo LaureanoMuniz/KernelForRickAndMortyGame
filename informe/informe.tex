@@ -144,7 +144,7 @@ Siguiendo lo indicado en el primer item, definimos a partir del índice 10, 4 de
 
 
 \justify
-Realizando lo pedido en el item b, pasamos a modo protegido. Para poder hacer esto modificamos el archivo kernel.asm, allí deshablitamos las interrupciones, cargamos en el registro GDTR la estructura \textbf{gdt_descriptor_t} y modificamos el ultimo bit del registro de control CR0, es decir, seteamos en 1 el bit de \textit{Protection Enable}. Posteriormente, escribimos el código necesario para saltar efectivamente a modo protegido. Debido a que este salto se consigue haciendo un \textit{far jump} a la próxima instrucción, designamos una etiqueta llamada \textbf{modo_protegido} a partir de la cual obtendremos el offset, mientras que como selector utilizamos el correspondiente al segmento de código de nivel 0. Además, seteamos la pila del kernel en la dirección 0x25000, es decir, en la base de la pila. Una vez que pasamos a modo protegido, cargamos correctamente los selectores de segmento, en los registros ds, es, fs, gs, ss, usando como registro auxiliar ax.
+Realizando lo pedido en el item b, pasamos a modo protegido. Para poder hacer esto modificamos el archivo kernel.asm, allí deshablitamos las interrupciones, cargamos en el registro GDTR la estructura \textbf{gdt_descriptor_t} y modificamos el ultimo bit del registro de control CR0, es decir, seteamos en 1 el bit de \textit{Protection Enable}. Posteriormente, escribimos el código necesario para saltar efectivamente a modo protegido. Debido a que este salto se consigue haciendo un \textit{far jump} a la próxima instrucción, designamos una etiqueta llamada \textbf{modo_protegido} a partir de la cual obtendremos el offset, mientras que como selector utilizamos el correspondiente al segmento de código de nivel 0. Además, seteamos la pila del kernel en la dirección 0x25000, es decir, en la base de la pila. Una vez que pasamos a modo protegido, cargamos correctamente los selectores de segmento, en los registros ds, es, fs, gs, ss, usando como registro auxiliar ax, donde se encontraba el selector de segmento de nivel 0 (RPL = 0).
 
 
 \justify
@@ -163,18 +163,52 @@ Para finalizar este ejercicio, realizamos un rutina encargada de limpiar la pant
 
 \subsection{Ejercicio 2}
 \justify
-Para realizar este ejercicio se modificaron los archivos \textit{idt.c} e \textit{idt.h}. Se completaron las entradas necesarias en la IDT para todas las rutinas de exepciones del procesador. Se definieron las entradas de la IDT para las excepciones y para las interrupciones de software (IDT_ENTRY e IDT_ENTRY_SOFTWARE). En el caso de las entradas de la IDT para las exepciones, 
+Inicialmente modificamos los archivos \textit{idt.c} e \textit{idt.h} para completar las entradas de la IDT. Definimos a la IDT como un arreglo de idt_entry_t de 255 posiciones, que primero inicializamos en cero, y el descriptor de la IDT (IDT_DESC), indicando el tamaño y la dirección de la IDT. Para inicializar las entradas de la IDT utilizamos un \textit{DEFINE} que, dado el número de la interrupción, completa los campos del descriptor de la IDT correspondiente. Para el caso de las interrupciones de software el DPL es 3, dado que las mismas deben poder ser accedidas por las tareas y en los demás casos el DPL es 0, ya que no deben poder ser accedidas por las tareas. En todos los casos el selector de segmento es de código de nivel 0, porque las rutinas no pueden ser modificadas por las tareas. Como la dirección de la IDT no está definida en tiempos de compilación fue necesario definir una función llamada idt_init que inicializara las entradas de la IDT en tiempos de ejecución. Definimos 21 entradas en la IDT para las excepciones del procesador(de 0 a 20).
+\justify
+Para imprimir las excepciones en la esquina superior izquierda de la pantalla  cuando estas ocurren, implementamos la función "print_exception", que se encuentra en el archivo \textit{screen.c}. La misma es llamada inicialmente en el código de \textit{isr.asm}, aunque luego esto será modificado como se ve en el código, ya que esta acción será realizada por el modo debug. 
 
+
+%Acá va una imagen de un descriptor de la IDT.
 
 
 \subsection{Ejercicio 3}
+\justify
+En este ejercicio definimos dos entradas en la IDT para las interrupciones externas o de hardware (32 del clock y 33 del keyboard) y cuatro entradas para las interrupciones de software(88, 89, 100, 123).
+\justify
+De acuerdo a lo pedido en el segundo, tercer y cuarto item, dentro del archivo \textit{isr.asm} escribimos el esqueleto de las rutinas de interrupciones del reloj, de teclado y de software, que luego irán siendo modificadas a lo largo del transcurso de los ejercicios.
+
+\justify
+\textbf{Rutina de interrupción del reloj}
+\justify
+Esta rutina comienza con un call a la función pic_finish1, para avisar que la interrupción fue atendida. Seguidamente se llama a la función "next_clock", provista por la cátedra. La misma se encarga de imprimir por pantalla una animación del un cursor rotando en la esquina inferior derecha de la pantalla.
+
+\justify
+\textbf{Rutina de interrupción del teclado}
+\justify
+Esta rutina comienza levantando del puerto 0x60 la tecla que fue presionada durante la interrupción. Para que esta tecla sea impresa por pantalla se implementó la función "print_digito" \ en el archivo \textit{screen.c}. Para finalizar, hacemos un call a pic_finish1, para avisar que la interrupción fue atendida.
+
+\justify
+\textbf{Rutinas de interrupciones de software}
+\justify
+Las rutinas de interrupciones de software solo mueven a eax los números indicados por el item d, esto luego será modificado.
+
 \subsection{Ejercicio 4}
+\justify
+Para realizar este ejercicio modificamos los archivos \textit{mmu.h} y \textit{mmu.c}.
+Inicialmente completamos la función ``mmu_init" \ con la dirección de la primera página libre del kernel (0x100000), y luego completamos la función ``mmu_next_free_kernel_page" \ para que nos devuelva la dirección de la próxima página libre del área libre del kernel.   
+\justify
+Para inicializar el directorio y las tablas de páginas del kernel, implementamos la función ``mmu_init_kernel_dir", que crea un directorio y una tabla de páginas (tabla_0) del tipo \textit{page_directory_entry}  y \textit{page_table_entry}, respectivamente. Estas estructuras fueron definidas en el archivo \textit{mmu.h} y siguen el formato de las entradas al directorio y a la tabla de páginas. Una vez creados los inicializamos en 0.
+\justify
+La primera entrada del directorio (directorio[0]) va a mapear a la tabla de páginas creada y esta mapeará a todo el kernel, por lo que completamos el campo de la base del directorio[0] con la dirección de la tabla de páginas. El privilegio de esta entrada es 0. Una vez mapeado el directorio a la primera tabla de páginas, mapeamos la misma al kernel, usando identity mapping. Nuevamente, el privilegio de cada entrada de la tabla de páginas es 0. Al final de la rutina devolvemos la dirección del directorio de tablas de páginas. 
+\justify  
+Ya creadas las funciones para inicializar el directorio y la tabla de páginas, escribimos en \textit{kernel.asm} el código necesario para activar paginación: inicializamos el manejador de memoria y el directorio de páginas mediante un call a la función ``mmu.init" \ y ``mmu_init_kernel_dir", respectivamente. Luego, cargamos en el registro cr3 la dirección del directorio y activamos paginación seteando en 1 el bit 31 de cr0.
+ 
 \subsection{Ejercicio 5}
+
+
 \subsection{Ejercicio 6}
 \subsection{Ejercicio 7}
 \subsection{Ejercicio 8}
-\subsection{Ejercicio 9}
-
 
 
 
