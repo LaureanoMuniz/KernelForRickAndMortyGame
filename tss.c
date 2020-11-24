@@ -14,8 +14,7 @@
 tss_t tss_initial = {0};
 tss_t tss_idle = {
   //Chequear
-    .esp0 = KERNEL_STACK, 
-    .ss0 = GDT_OFF_D0_DESC,
+    
     .cr3 = KERNEL_PAGE_DIR,
     .eip = TASK_IDLE_PHY_START,
     .eflags = EFLAG,
