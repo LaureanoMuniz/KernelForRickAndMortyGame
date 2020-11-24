@@ -38,8 +38,7 @@ void screen_draw_layout(void);
 
 void imprimir_debug(uint32_t id_tarea, uint8_t gs, uint8_t fs, uint8_t es, uint8_t ds, 
                     uint32_t edi, uint32_t esi, uint32_t ebp, uint32_t esp_kernel, 
-                    uint32_t ebx, uint32_t edx, uint32_t ecx, uint32_t eax,
-                    uint32_t err,uint32_t eip, uint8_t cs, uint32_t eflags, uint32_t esp, uint8_t ss);
+                    uint32_t ebx, uint32_t edx, uint32_t ecx, uint32_t eax);
 
 void copiar_pantalla(void);
 
@@ -48,4 +47,6 @@ void devolver_pantalla(void);
 void actualizar_puntajes(void);
 
 void actualizar_pantalla(void);
+
+void print_ganador(void);
 #endif //  __SCREEN_H__

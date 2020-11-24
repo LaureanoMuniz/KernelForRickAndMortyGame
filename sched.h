@@ -20,10 +20,12 @@ typedef struct scheduler_t{
   uint32_t last_task[2];
   uint32_t state[sched_max_task];
   uint32_t idx_gdt[sched_max_task];
+  uint32_t reloj[sched_max_task];
 }scheduler;
 
 extern scheduler sched;
 extern uint32_t debug_state;
+
 
 extern void saltar_idle(void);
 void sched_init(void);

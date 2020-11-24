@@ -45,6 +45,7 @@ extern servicio_portal_gun
 global _isr%1
 
 _isr%1:
+    xchg bx, bx
     pushad      ;pusheo registros generales    
     mov ax, ds 
     push eax
@@ -57,7 +58,10 @@ _isr%1:
     mov eax, %1
     push eax
     call copiar_pantalla
+    cmp DWORD [debug_state], 1
+    jne .no_debug
     call imprimir_debug ;Se rompe no hace falta arreglar pila?
+    .no_debug:
     ;call print_exception
     call sched_desalojar
     
@@ -102,7 +106,7 @@ _isr32:
     je .fin
 
     call next_clock
-    ;xchg bx, bx 
+    xchg bx, bx 
     call actualizar_pantalla
     
     ;;Scheduler

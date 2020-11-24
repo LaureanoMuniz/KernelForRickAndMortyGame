@@ -148,45 +148,7 @@ modo_protegido:
     mov cr0, eax
 
     ;call printLU
-
-    xchg bx, bx
-    push 3
-    push 0x400000
-    push 0x08000000
-    mov eax, cr3
-    push eax
-    call mmu_map_page
-    add esp, 16
-    mov BYTE [0x08000000], 0XFE
     
-    xchg bx, bx 
-    
-    push 0x08000000
-    mov eax, cr3
-    push eax
-    call mmu_unmap_page
-    add esp, 8
-    push 0x08001000
-    mov eax, cr3
-    push eax
-    call mmu_unmap_page
-    add esp, 8
-    ;paddr_t mmu_init_task_dir(paddr_t phy_start, paddr_t code_start, size_t pages) 
-    xchg bx, bx
-
-    push 4
-    push 0x10000
-    push 0x1D04000
-    call mmu_init_task_dir
-    add esp, 12
-    mov edx, cr3
-    
-    mov cr3, eax
-    mov ecx,0
-    mov ax, GDT_OFF_VID_DESC
-    mov gs, ax
-    mov WORD [gs:ecx], 0x5020
-    mov cr3, edx 
     ; Inicializar tss
     call tss_init
 

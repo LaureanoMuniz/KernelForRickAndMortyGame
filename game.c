@@ -15,8 +15,16 @@
 #include "i386.h"
 
 juego_type juego;
+uint32_t max_esp_task[sched_max_task];
 uint32_t maximo(uint32_t n,uint32_t m){
     if(n>m){
+        return n;
+    }
+    return m;
+    
+}
+uint32_t minimo(uint32_t n, uint32_t m){
+    if(n<m){
         return n;
     }
     return m;
@@ -73,6 +81,13 @@ void game_init(void) {
         juego.page_stack0_Mr_M[i] = mmu_next_free_kernel_page();
     }
 
+    //Maximos esp
+    max_esp_task[0]=TASK_CODE_VIRTUAL+4*PAGE_SIZE;
+    max_esp_task[1]=TASK_CODE_VIRTUAL+4*PAGE_SIZE;
+    for(int i=2;i<sched_max_task;i++){
+      uint32_t slot_tarea = (i-2)/2;
+      max_esp_task[i]= (slot_tarea+1)*(2*PAGE_SIZE)+ NEW_TASKS_VIRTUAL_START;
+    }
 }
 
 uint32_t buscar_semilla(uint32_t x, uint32_t y){
@@ -87,7 +102,7 @@ uint32_t buscar_semilla(uint32_t x, uint32_t y){
 uint32_t servicio_meeseks(uint32_t code, uint32_t x, uint32_t y){
     //aca poner restricciones
     uint32_t dentro_del_mapa = (x < SIZE_M) && (y < SIZE_N);
-    uint32_t dentro_de_nivel_3 = (TASK_CODE_VIRTUAL<=code) && (code+PAGE_SIZE<=TASK_CODE_VIRTUAL+4*PAGE_SIZE);
+    uint32_t dentro_de_nivel_3 = (TASK_CODE_VIRTUAL<=code) && (code<TASK_CODE_VIRTUAL+4*PAGE_SIZE);
     if(sched.last_task[sched.turno]>1 || !dentro_del_mapa || !dentro_de_nivel_3){ //no es Rick ni Morty
         sched_desalojar(); //desalojar tarea actual
     }
@@ -110,8 +125,9 @@ uint32_t servicio_meeseks(uint32_t code, uint32_t x, uint32_t y){
         return 0;
     }
     //hay lugar y no hay semilla
+    sched.reloj[nueva_tarea] = 0;
     juego.uso_portal_gun[nueva_tarea-2] = 0;
-    juego.max_move_Mr_M[nueva_tarea-2] = 15; //capaz aca va 16
+    juego.max_move_Mr_M[nueva_tarea-2] = 16; 
     juego.posiciones_Mr_M[nueva_tarea-2].x=x;
     juego.posiciones_Mr_M[nueva_tarea-2].y=y;
 
@@ -127,7 +143,8 @@ uint32_t servicio_meeseks(uint32_t code, uint32_t x, uint32_t y){
     // se copian el codigo de la tarea
     uint8_t* copy_dest = (uint8_t*) dir_source;
     uint8_t* copy_source = (uint8_t*) code;
-    for(int i=0;i<PAGE_SIZE;i++){
+    uint32_t limite = TASK_CODE_VIRTUAL + 4*PAGE_SIZE;
+    for(uint32_t i=0;i<minimo(PAGE_SIZE,limite-code);i++){
         copy_dest[i]=copy_source[i];
     }
 
@@ -258,7 +275,7 @@ uint32_t random_task_rival(){
 void servicio_portal_gun(){
     uint32_t tarea = sched.last_task[sched.turno];
     if(tarea < 2){ // es Rick o Morty
-        sched_desalojar();
+        return;
     }
     if(juego.uso_portal_gun[tarea-2]){
         return;

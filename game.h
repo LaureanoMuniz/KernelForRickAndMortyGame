@@ -10,6 +10,7 @@
 #define __GAME_H__
 
 #include "types.h"
+#include "sched.h"
 #define CANT_MAX_MR_M 20
 #define CANT_MAX_MEGASEMILLAS 40
 typedef enum e_task_type {
@@ -35,6 +36,8 @@ typedef struct s_juego{
 }juego_type;
 
 extern juego_type juego;
+extern uint32_t max_esp_task[sched_max_task];
+
 
 void game_init(void);
 void colocar_Megasemillas(void);

@@ -11,6 +11,14 @@
 #include "sched.h"
 #include "game.h"
 
+char* clock = "|/-\\";
+
+void print_char(char caracter, uint32_t x, uint32_t y, uint16_t attr) {
+  ca(*p)[VIDEO_COLS] = (ca(*)[VIDEO_COLS])VIDEO; // magia
+  p[y][x].c=caracter;
+  p[y][x].a=attr;
+}
+
 void print(const char* text, uint32_t x, uint32_t y, uint16_t attr) {
   ca(*p)[VIDEO_COLS] = (ca(*)[VIDEO_COLS])VIDEO; // magia
   int32_t i;
@@ -170,12 +178,35 @@ void print_digito(uint8_t digito){
  }
 
 }
+//uint32_t err,uint32_t eip, uint8_t cs, uint32_t eflags, uint32_t esp, uint8_t ss
 void imprimir_debug(uint32_t num_excepcion, uint8_t gs, uint8_t fs, uint8_t es, uint8_t ds, 
                     uint32_t edi, uint32_t esi, uint32_t ebp, uint32_t esp_kernel, 
-                    uint32_t ebx, uint32_t edx, uint32_t ecx, uint32_t eax,
-                    uint32_t err,uint32_t eip, uint8_t cs, uint32_t eflags, uint32_t esp, uint8_t ss){
-
-  esp_kernel++; //para que haga algo
+                    uint32_t ebx, uint32_t edx, uint32_t ecx, uint32_t eax){
+  
+  uint32_t err; 
+  uint32_t eip;
+  uint32_t cs;
+  uint32_t eflags;
+  uint32_t esp;
+  uint32_t ss;
+  uint32_t* pila = (uint32_t*) esp_kernel;
+  if(num_excepcion == 8 || num_excepcion == 10 || num_excepcion == 11 ||
+     num_excepcion == 12 || num_excepcion == 13 || num_excepcion == 14 || num_excepcion == 17){ //error code
+    err = pila[0];
+    eip = pila[1];
+    cs = pila[2];
+    eflags = pila[3];
+    esp = pila[4];
+    ss = pila[5];
+  }
+  else{
+    err = 0;
+    eip = pila[0];
+    cs = pila[1];
+    eflags = pila[2];
+    esp = pila[3];
+    ss = pila[4];
+  }
   debug_state=2; 
   //  Imprime bloque negro
   uint32_t initFila = 1;
@@ -225,17 +256,35 @@ void imprimir_debug(uint32_t num_excepcion, uint8_t gs, uint8_t fs, uint8_t es, 
 // Imprimir stack y contenido 
   //uint32_t* stack = (uint32_t*)esp;
   print("stack", 40 , 20, C_FG_WHITE| C_BG_BLACK);
-  print_hex(0, 8, 40, 22, C_FG_LIGHT_GREEN | C_BG_BLACK);
-  print_hex(0, 8, 40, 24, C_FG_LIGHT_GREEN | C_BG_BLACK);
-  print_hex(0, 8, 40, 26, C_FG_LIGHT_GREEN | C_BG_BLACK);
-
- // Imprimir backtrace y contenido 
+  uint32_t fila = 22;
+  uint32_t stack = esp;
+  for(int i=0;i<3;i++){
+    if(stack+4<=max_esp_task[id_tarea]){
+      uint32_t* stack_p = (uint32_t*) stack; 
+      print_hex(stack_p[0], 8, 40, fila, C_FG_LIGHT_GREEN | C_BG_BLACK);
+      stack+=4;
+    }
+    else{
+      print_hex(0, 8, 40, fila, C_FG_LIGHT_GREEN | C_BG_BLACK);
+    }
+    fila+=2;
+  }
+  
+  // Imprimir backtrace y contenido 
+  fila = 30;
+  stack=ebp;
   print("backtrace", 40 , 28, C_FG_WHITE| C_BG_BLACK);
-  print_hex(0, 8, 40, 30, C_FG_LIGHT_GREEN | C_BG_BLACK);
-  print_hex(0, 8, 40, 32, C_FG_LIGHT_GREEN | C_BG_BLACK);
-  print_hex(0, 8, 40, 34, C_FG_LIGHT_GREEN | C_BG_BLACK);
-
-
+  for(int i=0;i<3;i++){
+    if(stack+8<=max_esp_task[id_tarea]){
+      uint32_t* stack_p = (uint32_t*) stack; 
+      print_hex(stack_p[1], 8, 40, fila, C_FG_LIGHT_GREEN | C_BG_BLACK);
+      stack=stack_p[0];
+    }
+    else{
+      print_hex(0, 8, 40, fila, C_FG_LIGHT_GREEN | C_BG_BLACK);
+    }
+    fila+=2;
+  }
 }
 void copiar_pantalla(){
   ca(*p)[VIDEO_COLS] = (ca(*)[VIDEO_COLS])VIDEO;
@@ -294,4 +343,52 @@ void actualizar_pantalla(){
       }
     }
     actualizar_puntajes();
+    if(sched.state[0] == TASK_DEAD || sched.state[1] == TASK_DEAD || juego.cant_Megasemilla==0){ // si termino el juego
+      print_ganador();
+    }
+
+   
+
+    // Printeo los relojes de Rick.
+    print_char(clock[sched.reloj[0]],17,44,C_FG_WHITE | C_BG_BLACK);
+    for(uint32_t i = 0; i<10; i++){
+      if(sched.state[2*i+2]==TASK_DEAD){
+        print("X",21+i*4,43,C_FG_WHITE | C_BG_BLACK);
+      }
+      else{
+        print_char(clock[sched.reloj[2*i+2]],21+i*4,43,C_FG_WHITE | C_BG_BLACK);
+      }
+     
+    }
+    // Printeo los relojes de Morty
+    print_char(clock[sched.reloj[1]],62,44,C_FG_WHITE | C_BG_BLACK);
+    for(uint32_t i = 0; i<10; i++){
+      if(sched.state[2*i+3]==TASK_DEAD){
+        print("X",21+i*4,46,C_FG_WHITE | C_BG_BLACK);
+      }
+      else{
+        print_char(clock[sched.reloj[2*i+3]],21+i*4,46,C_FG_WHITE | C_BG_BLACK);
+      }
+    }    
+}
+
+void print_ganador(){
+  if(sched.state[0]==TASK_DEAD){ // Rick fue desalojado
+    print("Gano Morty", 35, 0, C_FG_BLUE | C_BG_BLACK );
+    return;
+  }
+  if(sched.state[1] == TASK_DEAD){ // Morty fue desalojado
+    print("Gano Rick", 35, 0, C_FG_RED | C_BG_BLACK );
+    return;
+  }
+  //Ninguna tarea fue desalojada -> se asimilaron todas las megasemillas
+  if(juego.puntajes[0]==juego.puntajes[1]){
+    print("Empate", 35, 0, C_FG_WHITE | C_BG_BLACK );
+  }
+  else if(juego.puntajes[0]>juego.puntajes[1]){//Gano Rick
+    print("Gano Rick", 35, 0, C_FG_RED | C_BG_BLACK );
+  }
+  else{
+    print("Gano Morty", 35, 0, C_FG_BLUE | C_BG_BLACK );
+  }
 }

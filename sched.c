@@ -24,10 +24,11 @@ void sched_init(void) {
   sched.last_task[0]=0; //ultima tarea de Rick
   sched.last_task[1]=1; //ultima tarea de Morty
   sched.turno = 1; //Proximo turno es de Rick
+
 }
 
 uint16_t sched_next_task(void) {
-  if(sched.state[0] == TASK_DEAD || sched.state[1] == TASK_DEAD){
+  if(sched.state[0] == TASK_DEAD || sched.state[1] == TASK_DEAD || juego.cant_Megasemilla==0){
     return GDT_IDX_TSS_IDLE<<3; //selector de tarea
   }
   if(sched.state[sched.last_task[sched.turno]]==TASK_EJEC){
@@ -44,6 +45,7 @@ uint16_t sched_next_task(void) {
     juego.max_move_Mr_M[next_task-2] = maximo(juego.max_move_Mr_M[next_task-2]-1,2);
   }
   sched.state[next_task]=TASK_EJEC;
+  sched.reloj[next_task]=(sched.reloj[next_task]+1)%4;
   return sched.idx_gdt[next_task]<<3; //selector de tarea
 }
 
