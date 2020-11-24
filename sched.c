@@ -27,7 +27,7 @@ void sched_init(void) {
 }
 
 uint16_t sched_next_task(void) {
-  if(sched.state[0] == TASK_DEAD || sched.state[1] == TASK_DEAD || debug_state == 2){
+  if(sched.state[0] == TASK_DEAD || sched.state[1] == TASK_DEAD){
     return GDT_IDX_TSS_IDLE<<3; //selector de tarea
   }
   if(sched.state[sched.last_task[sched.turno]]==TASK_EJEC){
@@ -40,6 +40,9 @@ uint16_t sched_next_task(void) {
     next_task=(next_task+2)%sched_max_task;
   }
   sched.last_task[sched.turno]=next_task;
+  if(next_task>1){ // es Mr M
+    juego.max_move_Mr_M[next_task-2] = maximo(juego.max_move_Mr_M[next_task-2]-1,2);
+  }
   sched.state[next_task]=TASK_EJEC;
   return sched.idx_gdt[next_task]<<3; //selector de tarea
 }
@@ -54,10 +57,7 @@ void sched_desalojar(){
     //Termino el juego
   }
   else{ //Mr M
-    //Borrar del mapa
-    print(" ",juego.posiciones_Mr_M[task_a_desalojar-2].x, 
-          juego.posiciones_Mr_M[task_a_desalojar-2].y+1, C_BG_GREEN);
-      //Unmapear Mr M
+    //Unmapear Mr M
     uint32_t slot_tarea = (task_a_desalojar-2)/2;
     vaddr_t virtual_Mr_M = NEW_TASKS_VIRTUAL_START + slot_tarea*(PAGE_SIZE*2);
     mmu_unmap_page(rcr3(), virtual_Mr_M);

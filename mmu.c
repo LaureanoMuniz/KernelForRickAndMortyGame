@@ -152,6 +152,26 @@ paddr_t mmu_init_task_dir(paddr_t phy_start, paddr_t code_start, size_t pages) {
 	return cr3_new;
 }
 
+void move_code_Mr_M(paddr_t orig, paddr_t dest){
+	//mapear las paginas necesarias del mapa (donde se encuentra el Mr M y donde quiero que este)
+	//Se mapean con Identity Mapping
+	//Puede ser nivel supervisor o user, solo se llama cuando esta ejecutando con nivel 0
+	mmu_map_page(rcr3(), orig, orig, 3);
+	mmu_map_page(rcr3(), orig + PAGE_SIZE, orig + PAGE_SIZE, 3);
+	mmu_map_page(rcr3(), dest, dest, 3);
+	mmu_map_page(rcr3(), dest + PAGE_SIZE, dest + PAGE_SIZE, 3);
 
+	uint8_t* orig_copy = (uint8_t*) orig;
+	uint8_t* dest_copy = (uint8_t*) dest;
+	for(int i = 0; i < 2*PAGE_SIZE;i++){
+		dest_copy[i]=orig_copy[i];
+	}
+
+	mmu_unmap_page(rcr3(), orig);
+	mmu_unmap_page(rcr3(), orig + PAGE_SIZE);
+	mmu_unmap_page(rcr3(), dest);
+	mmu_unmap_page(rcr3(), dest + PAGE_SIZE);
+ 
+}
 
 

@@ -31,5 +31,4 @@ void sched_desalojar(void);
 uint16_t sched_next_task(void);
 void change_state_debug(void);
 
-void actualizar_puntajes(void);
 #endif //  __SCHED_H__

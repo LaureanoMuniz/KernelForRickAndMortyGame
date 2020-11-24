@@ -24,6 +24,7 @@ paddr_t mmu_init_kernel_dir(void);
 
 paddr_t mmu_init_task_dir(paddr_t phy_start, paddr_t code_start, size_t pages);
 
+void move_code_Mr_M(paddr_t orig, paddr_t dest);
 
 typedef struct str_page_directory_entry {
   uint8_t present : 1;
