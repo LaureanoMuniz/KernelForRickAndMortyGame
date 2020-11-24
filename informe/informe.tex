@@ -159,7 +159,12 @@ Seguidamente, definimos otra entrada en la GDT destinada a un segmento de vídeo
 \justify
 Para finalizar este ejercicio, realizamos un rutina encargada de limpiar la pantalla, y pintar el área del mapa de color verde, junto con las barras de los jugadores Rick y Morty. Inicialmente, esta rutina fue implementada en ASM dentro del archivo \textit{kernel.asm}, para corroborar el correcto funcionamiento del acceso al segmento de vídeo, pero luego fue reemplazada por la función en C  "inicializar_pantalla" que se encuentra en el archivo \textit{screen.c}. La pantalla se ve de la siguiente manera:
 
-%Acá va la imagen de la pantalla.  
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.6]{img/Pantalla.pdf}
+	\caption{Pantalla inicial.}
+\end{figure}
+
 
 \subsection{Ejercicio 2}
 \justify
@@ -194,16 +199,30 @@ Las rutinas de interrupciones de software solo mueven a eax los números indicad
 
 \subsection{Ejercicio 4}
 \justify
-Para realizar este ejercicio modificamos los archivos \textit{mmu.h} y \textit{mmu.c}.
-Inicialmente completamos la función ``mmu_init" \ con la dirección de la primera página libre del kernel (0x100000), y luego completamos la función ``mmu_next_free_kernel_page" \ para que nos devuelva la dirección de la próxima página libre del área libre del kernel.   
-\justify
 Para inicializar el directorio y las tablas de páginas del kernel, implementamos la función ``mmu_init_kernel_dir", que crea un directorio y una tabla de páginas (tabla_0) del tipo \textit{page_directory_entry}  y \textit{page_table_entry}, respectivamente. Estas estructuras fueron definidas en el archivo \textit{mmu.h} y siguen el formato de las entradas al directorio y a la tabla de páginas. Una vez creados los inicializamos en 0.
 \justify
 La primera entrada del directorio (directorio[0]) va a mapear a la tabla de páginas creada y esta mapeará a todo el kernel, por lo que completamos el campo de la base del directorio[0] con la dirección de la tabla de páginas. El privilegio de esta entrada es 0. Una vez mapeado el directorio a la primera tabla de páginas, mapeamos la misma al kernel, usando identity mapping. Nuevamente, el privilegio de cada entrada de la tabla de páginas es 0. Al final de la rutina devolvemos la dirección del directorio de tablas de páginas. 
+ 
 \justify  
 Ya creadas las funciones para inicializar el directorio y la tabla de páginas, escribimos en \textit{kernel.asm} el código necesario para activar paginación: inicializamos el manejador de memoria y el directorio de páginas mediante un call a la función ``mmu.init" \ y ``mmu_init_kernel_dir", respectivamente. Luego, cargamos en el registro cr3 la dirección del directorio y activamos paginación seteando en 1 el bit 31 de cr0.
- 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{img/MapearKernel.pdf}
+	\caption{Mapeo del kernel.}
+\end{figure}
+
+\newpage
 \subsection{Ejercicio 5}
+\justify
+Inicialmente y siguiendo lo indicado por el primer item, completamos la función ``mmu_init" \ con la dirección de la primera página libre del kernel (0x100000), y luego completamos la función ``mmu_next_free_kernel_page" \ para que nos devuelva la dirección de la próxima página libre del área libre del kernel.
+\justify
+Implementamos la función ``mmu_map_page" que, dado un cr3, una dirección virtual, una dirección fisica y unos atributos, mapea ambas direcciones. Lo primero que realiza esta función es obtener de la dirección virtual el índice del directorio de tabla de páginas y el índice dentro de la tabla de páginas. Luego se fija si la tabla de páginas de esa page_directory_entry está presente y, en caso de que no, la crea pidiendo la próxima página libre del área del kernel y la inicializa con todas las entradas en 0. Una vez creada la tabla de páginas, se completa la entrada correspondiente de la page_directory_entry con la base de la tabla de páginas, los atributos pasados por parámetro.
+
+\justify
+
+ 
+
 
 
 \subsection{Ejercicio 6}
