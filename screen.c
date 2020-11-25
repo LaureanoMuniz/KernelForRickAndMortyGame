@@ -259,7 +259,7 @@ void imprimir_debug(uint32_t num_excepcion, uint8_t gs, uint8_t fs, uint8_t es, 
   uint32_t fila = 22;
   uint32_t stack = esp;
   for(int i=0;i<3;i++){
-    if(stack+4<=max_esp_task[id_tarea]){
+    if(min_esp_task[id_tarea]<=stack&&stack+4<=max_esp_task[id_tarea]){
       uint32_t* stack_p = (uint32_t*) stack; 
       print_hex(stack_p[0], 8, 40, fila, C_FG_LIGHT_GREEN | C_BG_BLACK);
       stack+=4;
@@ -275,7 +275,7 @@ void imprimir_debug(uint32_t num_excepcion, uint8_t gs, uint8_t fs, uint8_t es, 
   stack=ebp;
   print("backtrace", 40 , 28, C_FG_WHITE| C_BG_BLACK);
   for(int i=0;i<3;i++){
-    if(stack+8<=max_esp_task[id_tarea]){
+    if(min_esp_task[id_tarea]<=stack && stack+8<=max_esp_task[id_tarea]){
       uint32_t* stack_p = (uint32_t*) stack; 
       print_hex(stack_p[1], 8, 40, fila, C_FG_LIGHT_GREEN | C_BG_BLACK);
       stack=stack_p[0];

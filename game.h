@@ -37,7 +37,7 @@ typedef struct s_juego{
 
 extern juego_type juego;
 extern uint32_t max_esp_task[sched_max_task];
-
+extern uint32_t min_esp_task[sched_max_task];
 
 void game_init(void);
 void colocar_Megasemillas(void);

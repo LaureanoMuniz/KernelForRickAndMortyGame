@@ -16,6 +16,7 @@
 
 juego_type juego;
 uint32_t max_esp_task[sched_max_task];
+uint32_t min_esp_task[sched_max_task];
 uint32_t maximo(uint32_t n,uint32_t m){
     if(n>m){
         return n;
@@ -84,9 +85,12 @@ void game_init(void) {
     //Maximos esp
     max_esp_task[0]=TASK_CODE_VIRTUAL+4*PAGE_SIZE;
     max_esp_task[1]=TASK_CODE_VIRTUAL+4*PAGE_SIZE;
+    min_esp_task[0]=TASK_CODE_VIRTUAL;
+    min_esp_task[1]=TASK_CODE_VIRTUAL;
     for(int i=2;i<sched_max_task;i++){
       uint32_t slot_tarea = (i-2)/2;
       max_esp_task[i]= (slot_tarea+1)*(2*PAGE_SIZE)+ NEW_TASKS_VIRTUAL_START;
+      min_esp_task[i]= (slot_tarea)*(2*PAGE_SIZE)+ NEW_TASKS_VIRTUAL_START;
     }
 }
 
