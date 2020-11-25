@@ -260,15 +260,15 @@ Notemos que la maxima cantidad de tareas que puede haber simultáneamente es $24
 	\item \textbf{idx_gdt}: al igual que el anterior es un array de 22 valores, que indica cual es el índice del descriptor de TSS de cada una de las tareas en la GDT. Por ende, podemos obtener un selector de una TSS shifteando hacia la izquierda el índice de la tarea en la GDT.
 	\item \textbf{reloj}: otro array de 22 valores, que indica $4$ estados posibles (uno por cada estado del reloj) de cada una de las tareas.   
 \end{itemize}
-
-
+El orden de las tareas en los arrays es el siguiente:
+%Poner Imagen
 \justify
 Ahora debemos inicializar la estructura de datos, para ello creamos un función en \textbf{sched.c} llamada ``sched_init"\ . Lo primero que realiza esta función es inicializar los estados de todas las tareas como TASK_DEAD (las tareas Rick y Morty se inician en TASK_READY en la función ``game_init" \ que luego presentaremos). Luego inicializa los indices de cada una de las tareas en la GDT, teniendo en cuenta que los índices en la GDT respetan el mismo orden que los arrays anteriormente descritos. Por último, inicia las ultimas tareas de Rick y Morty, que en esta caso son las tareas principales, e inicia turno con $1$ para que el próximo turno corresponda a Rick.
 
 \justify
 Siguiendo lo indicado en el item b creamos un función ``sched_next_task"\ encargada de devolver el selector de segmento de TSS de la siguiente tarea a ejecutar. Si el juego terminó, es decir alguna tarea principal fue desalojada o si capturaron todas las megasemillas (esto lo vamos a explicar mejor en el ejercicio $8$), devolvemos el selector de la tarea Idle. En caso contrario, el juego no terminó por ende actualizamos el estado de la última tarea que ejecuto (si sigue viva). Luego, cambiamos el turno y buscamos la próxima tarea a ejecutar que pertenezca al turno actual. Para esto, realizamos una búsqueda lineal y si nos pasamos de rango volvemos al principio. Una vez encontrada la próxima tarea a ejecutar actualizamos last_task del turno actual. Si la siguiente tarea a ejecutar es un Mr. Meeseeks, actualizamos la maxima cantidad de casillas que se puede mover (se explicara más en el ejercicio $8$). Por último, actualizamos el estado de la proxima tarea a ejecutar, cambiamos el estado del reloj de la misma y devolvemos el selector de su TSS (RPL=0).
 \justify
-Para realizar el cambio de tarea, modificamos la rutina de atención del reloj (ISR 32). Definimos una variable en isr.asm llamada sched_task_selector, la cual se utiliza para guardar el selector de TSS de la tarea a la que queremos saltar y poder realizar un jmp far. Llamamos a la función ``sched_next_task"\ la cual nos devuelve en ax el resultado. Comparamos el resultado con el almacenado en el Task Register. En caso de que sean iguales, no hacemos nada. Caso contrario, guardamos en sched_task_selector el nuevo selector de TSS y realizamos un jmp far.
+Para realizar el cambio de tarea, modificamos la rutina de atención del reloj (ISR 32). Definimos una variable en isr.asm llamada sched_task_selector, la cual se utiliza para guardar el selector de TSS de la tarea a la que queremos saltar y poder realizar un jmp far. Llamamos a la función ``sched_next_task"\ la cual nos devuelve en ax el resultado. Comparamos el resultado con el almacenado en el Task Register. En caso de que sean iguales, no hacemos nada. Caso contrario, guardamos en sched_task_selector el nuevo selector de TSS y realizamos un jmp far. Como se pintan los relojes lo vamos a tratar mas adelante en el ejericio $9$.
 \justify
 Análogamente modificamos las rutinas de interrupciones de software para que salten a la tarea Idle cuando son invocadas.
 
@@ -276,9 +276,54 @@ Análogamente modificamos las rutinas de interrupciones de software para que sal
 Para atender a la excepciones creamos una función llamada ``sched_desalojar"\ en \textbf{sched.c}. La misma realiza una busqueda lineal para obtener la tarea que se está ejecutando (se puede utilizar last_task y turno para realizar esto). Se actualiza el estado de la misma y realizamos dos cosas distintas dependiendo si es una tarea principal o no (se verá mas en detalle en el ejercicio $8$). Por último, llamamos a una función llamada saltar_idle() definida en isr.asm.
 
 
+\justify
+Para implementar el debugger utilizamos la variable debug_state, esta puede tomar $3$ valores los cuales nos indicaran si modo debugger esta apagado (0), modo debugger esta activado (1) o si se esta printeando en pantalla el debugger (2).
+
+\justify
+Creamos dos funciones ``copiar_pantalla"\ y ``devolver_pantalla"\ en \textbf{screen.c} y una matriz de píxeles de 50x80 llamada copia_de_pantalla. Al llamar a ``copiar_pantalla"\ se copian los píxeles actuales de la pantalla en copia_de_pantalla y al llamar a ``devolver_pantalla"\ se pinta la pantalla con los píxeles indicados por copia_de_pantalla.
+\justify
+Se modifico la rutina de atención de las excepciones para que pushee todos los registros de propósito generales con pushad, luego pushee los selectores de datos y por ultimo el numero de excepción que ocurrió. Luego de esto se llama a copiar pantalla, se chequea si el estado de debug_state es $1$ y en caso de que lo sea se llama a ``imprimir_debug"\ que se encuentra definido en \textbf{screen.c}. Por ultimo, independientemente del valor de debug_state se desaloja la tarea actual llamando a ``sched_desalojar"\, la cual se encargara de saltar a la tarea Idle. Notemos que no restauramos la pila, ya que la tarea actual nunca mas será atendida por el scheduler, a menos que se la vuelva a crear si es una tarea Mr Meeseeks, pero en este caso será una tarea limpia.
+
+\justify
+La función ``imprimir_debug"\ toma como parámetros los registros de propósito general y los selectores de datos al momento de atender la excepción. Notemos que todos estos registros poseen el mismo valor que tenían antes de producirse la excepción, menos el registro ESP el cual será el de nivel 0. Como se produjo un cambio en el nivel de privilegio, el estado de la pila antes de pushear cualquier registro en la rutina de atención de excepciones es el siguiente:
+%Poner Imagen
+Cuando hacemos un pushad el valor de ESP que se pushea es el de antes de realizar esta operación. Por ende, los elementos que se ven en la imagen están en las posiciones siguientes al ESP pusheado. Por lo cual, podemos obtener estos valores leyendo [ESP], [ESP+4], $\dots$, pero notemos que tenemos que diferenciar si la excepción tiene código de error o no. Teniendo esto en cuenta podemos obtener los valores de la pila de nivel 0. Ahora, nos falta saber los valores de los cr's, pero para esto tenemos la funciones proveidas por la cátedra ``rcr0"\, ``rcr2"\, ``rcr2"\ y ``rcr3"\ .
+
+\justify
+Por último debemos imprimir los valores del stack y del backtrace. Para los valores del stack utilizamos el esp de la pila de nivel $3$ de la tarea e imprimimos los $3$ primeros valores ,teniendo en cuenta de estar en el rango de la tarea. Para el backtrace, usamos el $ebp$, asumiendo que se respeta la convención C. Con el mismo, podemos obtener con [ebp+4] la dirección de retorno de la función y con [ebp] el antiguo valor de ebp. Realizamos este proceso iterativamente 3 veces, colocando 0's si ebp o ebp+4 no estan en el rango de la tarea. Para saber si esta en el rango, utilizamos los arrays min_esp_task y max_esp_task, declarados en \textbf{game.h}, que nos indican el rango de memoria de cada tarea. Esto se puede realizar de esta manera ya que estamos utilizando segmentación flat.
+
+%Poner imagen de como queda la pila despues del armado de stackframe
+
+\justify
+Modificamos la rutina de interrupción del teclado para que si el scan code detecta que se presiona la tecla ``Y"\ se llame a la función ``change_state_debug"\ que se encuentra definida en \textbf{sched.c} la cual cambia los estados de debug_state como indica el enunciado y si esta mostrando en pantalla el debugger se utiliza la función ``devolver_pantalla"\ . La rutina de reloj también fue modificada para que no realice nada si debug_state es igual a $2$.
+
 
 \subsection{Ejercicio 8}
+\justify
+Notemos que Rick y Morty pueden poseer a lo sumo 10 Mr Meeseeks simultáneamente. Las direcciones virtuales donde debe estar el código y la pila de los Mr Meeseeks es a partir de 0x08000000. Podemos entonces definir que los espacios para cada tarea Mr Meeseeks que se pueda crear sea fijo, quedando así para cada tarea principal la siguiente asignación de espacios en su CR3:
+%Imagen en que rangos virtuales van a estar cada Mr M
 
+\justify
+Definimos las siguientes estructuras en \textbf{juego.h}:
+\begin{itemize}
+	\item \textbf{posicion}: posee dos valores x, y que representan una posición en el mapa.
+	\item \textbf{juego}: posee los siguientes datos:
+	\begin{itemize}
+		\item \textbf{posiciones_Mr_M}: una array de posiciones de tamaño 20 (igual a la cantidad maxima de tareas Mr Meeseeks), que indica en que posición esta cada tarea Mr Meeseeks, si es que se encuentra viva.
+		\item \textbf{posicion_megasemillas}: un array de tamaño 40 (igual a la cantidad de megasemillas iniciales), que indica en que posición se encuentran las megasemillas. Si la semilla no se encuentra mas en el mapa se guarda el valor -1 en x e y (como son unsigend int este valor es 0xFFFFFFFF).
+		\item \textbf{cant_Megasemillas}: contiene la cantidad de megasemillas que se encuentran en el mapa actualmente.
+		\item \textbf{puntajes}: es un array de dos valores. El primero indica el puntaje de Rick y el segundo el de Morty.
+		\item \textbf{page_stack0_Mr_M}: es un array de tamaño 20 que contiene las direcciones de las paginas para la pila de nivel 0 de cada tarea. Se podría usar una nueva pagina para cada nueva tarea que se crea, pero esto seria ineficiente ya que podemos reutilizarlas.
+		\item \textbf{color_players}: es un array de dos valores. El primer valor representa el color de Rick, y el segundo el color de Morty.
+		\item \textbf{max_move_Mr_M}: es un array de tamaño 20 que  indica el máximo movimiento que puede realizar cada tarea Mr Meeseeks con la syscall Move. Este valor no se guarda explícitamente, sino que cuando se crea un Mr Meeseeks en este array se guarda el valor 16. Luego, cada vez que el scheduler indique que la próxima tarea a ejecutar es un Mr Meeseeks se reduce el valor de esta tarea en el array en 1, a menos que sea igual a 2. Entonces el máximo movimiento que puede realizar un Mr Meeseeks es en realidad este valor divido $2$.
+		\item \textbf{uso_portal_gun}: es un array de 20 posiciones que indica si una tarea Mr Meeseeks ya uso la syscall use_portal_gun.
+		\item \textbf{cr3_players}: es un array de dos posiciones. En la primera contiene el CR3 de la tarea Rick, y en la segunda posición el CR3 de la tarea Morty.
+	\end{itemize}
+\end{itemize}
+Los arrays que contiene datos sobre los Mr Meeseeks tendrán el siguiente orden de tareas:
+%figura 
+\justify
+De esta forma dado el´índice de una tarea Mr Meeseeks en el scheduler, se puede obtener el índice en estos arrays restando $2$ y se puede obtener que numero de Mr Meeseeks es para cada tarea principal restando $2$ y luego dividiendo por $2$.
 
 
 \end{document}

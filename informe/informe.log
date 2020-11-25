@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.9.9)  24 NOV 2020 17:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.9.9)  25 NOV 2020 01:55
 entering extended mode
 **./informe.tex
 (informe.tex
@@ -585,42 +585,50 @@ File: ts1bch.fd 2004/10/18 font definitions for TS1/bch.
 LaTeX Info: Redefining \. on input line 277.
 LaTeX Info: Redefining \% on input line 277.
 [8]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 284.
-LaTeX Info: Redefining \. on input line 284.
-LaTeX Info: Redefining \% on input line 284.
+LaTeX Info: Redefining \. on input line 305.
+LaTeX Info: Redefining \% on input line 305.
  [9]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 284.
+LaTeX Info: Symbol \textasciiacute not provided by
+            font family bch in TS1 encoding.
+            Default family used instead on input line 326.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 329.
+LaTeX Info: Redefining \. on input line 329.
+LaTeX Info: Redefining \% on input line 329.
+ [10]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 329.
  (informe.aux
 LaTeX Info: Redefining \. on input line 26.
 LaTeX Info: Redefining \% on input line 26.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 284.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 284.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 329.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 329.
 Package rerunfilecheck Info: File `informe.out' has not changed.
 (rerunfilecheck)             Checksum: F774883DD24F7295D91924DF635CD7AB;577.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 284.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 329.
  ) 
 Here is how much of TeX's memory you used:
- 9427 strings out of 480790
- 150127 string characters out of 2895392
+ 9431 strings out of 480790
+ 150174 string characters out of 2895392
  435857 words of memory out of 3000000
- 25234 multiletter control sequences out of 15000+200000
- 550502 words of font info for 47 fonts, out of 3000000 for 9000
+ 25236 multiletter control sequences out of 15000+200000
+ 550837 words of font info for 48 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  46i,12n,47p,1174b,463s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/Ivo Pajor/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc
-}<C:/Users/Ivo Pajor/AppData/Local/Programs/MiKTeX/fonts/type1/bitstrea/charter
-/bchb8a.pfb><C:/Users/Ivo Pajor/AppData/Local/Programs/MiKTeX/fonts/type1/bitst
-rea/charter/bchr8a.pfb><C:/Users/Ivo Pajor/AppData/Local/Programs/MiKTeX/fonts/
-type1/bitstrea/charter/bchri8a.pfb><C:/Users/Ivo Pajor/AppData/Local/Programs/M
-iKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Ivo Pajor/AppData/Loca
-l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/Ivo Pajor
-/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/
-Users/Ivo Pajor/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
-tt10.pfb>
-Output written on informe.pdf (9 pages, 611918 bytes).
+ <C:\Users\Ivo Pajor\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\
+tcrm1000.pk>{C:/Users/Ivo Pajor/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/b
+ase/8r.enc}<C:/Users/Ivo Pajor/AppData/Local/Programs/MiKTeX/fonts/type1/bitstr
+ea/charter/bchb8a.pfb><C:/Users/Ivo Pajor/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/bitstrea/charter/bchr8a.pfb><C:/Users/Ivo Pajor/AppData/Local/Programs/MiK
+TeX/fonts/type1/bitstrea/charter/bchri8a.pfb><C:/Users/Ivo Pajor/AppData/Local/
+Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Ivo Pajor/A
+ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users
+/Ivo Pajor/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.
+pfb><C:/Users/Ivo Pajor/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
+ts/cm/cmssbx10.pfb><C:/Users/Ivo Pajor/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmtt10.pfb>
+Output written on informe.pdf (10 pages, 628951 bytes).
 PDF statistics:
- 185 PDF objects out of 1000 (max. 8388607)
- 25 named destinations out of 1000 (max. 500000)
+ 198 PDF objects out of 1000 (max. 8388607)
+ 26 named destinations out of 1000 (max. 500000)
  111 words of extra memory for PDF output out of 10000 (max. 10000000)
 
