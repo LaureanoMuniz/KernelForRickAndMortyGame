@@ -323,7 +323,14 @@ Definimos las siguientes estructuras en \textbf{juego.h}:
 Los arrays que contiene datos sobre los Mr Meeseeks tendrán el siguiente orden de tareas:
 %figura 
 \justify
-De esta forma dado el´índice de una tarea Mr Meeseeks en el scheduler, se puede obtener el índice en estos arrays restando $2$ y se puede obtener que numero de Mr Meeseeks es para cada tarea principal restando $2$ y luego dividiendo por $2$.
+De esta forma dado el índice de una tarea Mr Meeseeks en el scheduler, se puede obtener el índice en estos arrays restando $2$ y se puede obtener qué número de Mr Meeseeks es para cada tarea principal restando $2$ y luego dividiendo por $2$.
+\justify
+Para la distribucion de semillas en la pantalla del juego, en primera instancia se completa el array de posicion_megasemillas, nombrado anteriormente, con posiciones aleatorias dentro del mapa. Una vez hecho esto, la funcion ''actualizar_pantalla" se encarga de recorrer este array y mostrar en pantalla todas las semillas que tienen una posición válida.
+\justify
+Desarrollamos la lógica de la rutina meeseeks con ayuda de una función en C llamada "servicio_meeseeks". Dicha función recibe como parámetro la dirección virtual del código de un meeseek, y las coordenadas x e y donde el meeseek debe ubicarse en el mapa. En primer lugar, en esta función chequeamos que el código del meeseek se encuentre en el rango de direcciones específico de las tareas y que la posicion pasada por parámetro sea una posicion váĺida en el mapa. En caso de no cumplir estos requisitos, se desalojará a la tarea que llamó al servicio. Posteriormente, buscamos en el array de state, el índice de tarea que le correspondería a este nuevo meeseek creado. En caso de no haber lugares disponibles el meeseek no se crea. Luego, verificamos si en la posición donde se va a crear el meeseek hay una semilla. En caso de haberla, se aumenta el puntaje del jugador que llamó al servicio,y se actualiza la información de esa semilla. Si no se cumple ninguna de las condiciones anteriores, procedemos a realizar el proceso para ubicar al meeseek en el mapa. Primero, actualizamos la información necesaria de esta nueva tarea en los distintos array mencionados anteriormente. Luego, mapeamos las dos páginas del meeseek creado, ubicadas de acuerdo a su índice de tarea, en las dos páginas de la posición del mapa que corresponde. Una vez mapeadas, copiamos el código de la tarea, ubicado a partir de la direccion pasada por parámetro, en la dirección que le corresponde según su índice de tarea. Por último, iniciamos la tss de esta tarea recien creada con la función ``tss_init_task" \ y actualizamos el estado de la tarea en el scheduler. Esta función retorna la dirección virtual que le corresponde a esta tarea a partir de 0x80000000. 
+
+
+
 
 
 \end{document}
