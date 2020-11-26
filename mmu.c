@@ -141,9 +141,9 @@ paddr_t mmu_init_task_dir(paddr_t phy_start, paddr_t code_start, size_t pages) {
 		mmu_map_page(cr3_new, TASK_CODE_VIRTUAL + i*0x1000, phy_start + i*0x1000, 7); //Chequear
 		mmu_map_page(cr3, TASK_CODE_VIRTUAL + i*0x1000, phy_start + i*0x1000, 3); //user o no?
 	}
-	paddr_t* codigo = (paddr_t*)code_start;
-	paddr_t* copiar = (paddr_t*)TASK_CODE_VIRTUAL;
-	for(int i=0; i<(1024*(int)pages)/4; i++){
+	uint8_t* codigo = (uint8_t*)code_start;
+	uint8_t* copiar = (uint8_t*)TASK_CODE_VIRTUAL;
+	for(uint32_t i=0; i<PAGE_SIZE*pages; i++){
 		copiar[i]=codigo[i];
 	}
 	for(size_t i = 0; i < pages; i++){
