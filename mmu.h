@@ -35,10 +35,11 @@ typedef struct str_page_directory_entry {
   uint8_t A : 1;
   uint8_t IGN : 1;
   uint8_t page_size : 1;
-  uint8_t ignorados : 4;
+  uint8_t global : 1;
+  uint8_t available : 3;
   uint32_t base : 20;
 
-} __attribute__((__packed__, aligned(4))) page_directory_entry;
+} __attribute__((__packed__)) page_directory_entry;
 
 
 
@@ -52,10 +53,10 @@ typedef struct str_page_table_entry {
   uint8_t dirty : 1;
   uint8_t pat : 1;
   uint8_t global : 1;
-  uint8_t ignorados : 3;
+  uint8_t available : 3;
   uint32_t base : 20;
 
-} __attribute__((__packed__, aligned(4))) page_table_entry;
+} __attribute__((__packed__)) page_table_entry;
 
 #endif //  __MMU_H__
 
