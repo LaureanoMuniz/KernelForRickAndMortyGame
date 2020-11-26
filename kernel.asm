@@ -69,8 +69,7 @@ start:
 
     ; Imprimir mensaje de bienvenida
     print_text_rm start_rm_msg, start_rm_len, 0x07, 0, 0
-    ; pruebo poner un breakpoint
-    xchg bx,bx
+   
     
     ; Habilitar A20
     call A20_disable
@@ -129,6 +128,9 @@ modo_protegido:
         ;mov [ds:edx], ax
         ;add edx, 2
         ;jmp .pintar
+    ;.fin:
+    ;mov ax, GDT_OFF_D0_DESC
+    ;mov ds, ax
     xchg bx,bx
     call inicializar_pantalla ;Fijarse si puedo usar un selector de segmento en C. No
     ; Inicializar el manejador de memoria
