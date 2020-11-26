@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7400 64-bit) (preloaded format=pdflatex 2020.4.26)  26 NOV 2020 17:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7400 64-bit) (preloaded format=pdflatex 2020.4.26)  26 NOV 2020 18:23
 entering extended mode
 **./informe.tex
 (informe.tex
@@ -529,7 +529,7 @@ Package pdftex.def Info: img/Pantalla.pdf  used on input line 164.
 File: img/IDTdescriptor.pdf Graphic file (type pdf)
 <use img/IDTdescriptor.pdf>
 Package pdftex.def Info: img/IDTdescriptor.pdf  used on input line 178.
-(pdftex.def)             Requested size: 216.81168pt x 78.34126pt.
+(pdftex.def)             Requested size: 252.94327pt x 91.39682pt.
 LaTeX Info: Redefining \. on input line 180.
 LaTeX Info: Redefining \% on input line 180.
 [4 <./img/DescriptorVideo.pdf
@@ -542,12 +542,12 @@ nvalid other resource which is no dict (key 'ProcSets', type <array>); ignored.
 File: img/pde.pdf Graphic file (type pdf)
 <use img/pde.pdf>
 Package pdftex.def Info: img/pde.pdf  used on input line 213.
-(pdftex.def)             Requested size: 204.85844pt x 41.37578pt.
+(pdftex.def)             Requested size: 223.0721pt x 45.05415pt.
 <img/pte.pdf, id=129, 367.3725pt x 74.1972pt>
 File: img/pte.pdf Graphic file (type pdf)
 <use img/pte.pdf>
 Package pdftex.def Info: img/pte.pdf  used on input line 218.
-(pdftex.def)             Requested size: 204.85844pt x 41.37578pt.
+(pdftex.def)             Requested size: 223.0721pt x 45.05415pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -572,8 +572,8 @@ Overfull \hbox (56.29077pt too wide) in paragraph at lines 229--230
  [][] 
  []
 
-LaTeX Info: Redefining \. on input line 244.
-LaTeX Info: Redefining \% on input line 244.
+LaTeX Info: Redefining \. on input line 242.
+LaTeX Info: Redefining \% on input line 242.
 [6 <./img/pde.pdf
 
 pdfTeX warning: pdflatex.exe (file ./img/pde.pdf): PDF inclusion: invalid other
@@ -586,10 +586,10 @@ pdfTeX warning: pdflatex.exe (file ./img/pte.pdf): PDF inclusion: invalid other
 <img/TssdescriptorManual.pdf, id=209, 361.35pt x 130.5678pt>
 File: img/TssdescriptorManual.pdf Graphic file (type pdf)
 <use img/TssdescriptorManual.pdf>
-Package pdftex.def Info: img/TssdescriptorManual.pdf  used on input line 257.
-(pdftex.def)             Requested size: 180.67456pt x 65.28372pt.
-LaTeX Info: Redefining \. on input line 269.
-LaTeX Info: Redefining \% on input line 269.
+Package pdftex.def Info: img/TssdescriptorManual.pdf  used on input line 254.
+(pdftex.def)             Requested size: 252.94327pt x 91.39682pt.
+LaTeX Info: Redefining \. on input line 264.
+LaTeX Info: Redefining \% on input line 264.
  [7 <./img/TssdescriptorManual.pdf
 
 pdfTeX warning: pdflatex.exe (file ./img/TssdescriptorManual.pdf): PDF inclusio
@@ -597,68 +597,81 @@ n: invalid other resource which is no dict (key 'ProcSets', type <array>); igno
 red.
 >]
 LaTeX Font Info:    Trying to load font information for TS1+bch on input line 2
-79.
+76.
  ("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ts1bch.fd"
 File: ts1bch.fd 2004/10/18 font definitions for TS1/bch.
 )
 <img/ArrayRickyMortyIDX.pdf, id=233, 377.49028pt x 60.225pt>
 File: img/ArrayRickyMortyIDX.pdf Graphic file (type pdf)
 <use img/ArrayRickyMortyIDX.pdf>
-Package pdftex.def Info: img/ArrayRickyMortyIDX.pdf  used on input line 290.
+Package pdftex.def Info: img/ArrayRickyMortyIDX.pdf  used on input line 287.
 (pdftex.def)             Requested size: 301.99263pt x 48.18005pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 LaTeX Info: Redefining \. on input line 296.
 LaTeX Info: Redefining \% on input line 296.
-[8 <./img/ArrayRickyMortyIDX.pdf
+[8]
+LaTeX Info: Redefining \. on input line 317.
+LaTeX Info: Redefining \% on input line 317.
+ [9 <./img/ArrayRickyMortyIDX.pdf
 
 pdfTeX warning: pdflatex.exe (file ./img/ArrayRickyMortyIDX.pdf): PDF inclusion
 : invalid other resource which is no dict (key 'ProcSets', type <array>); ignor
 ed.
 >]
-LaTeX Info: Redefining \. on input line 320.
-LaTeX Info: Redefining \% on input line 320.
- [9]
 <img/AreaVirtualMeeseeks.pdf, id=269, 234.8775pt x 262.0992pt>
 File: img/AreaVirtualMeeseeks.pdf Graphic file (type pdf)
 <use img/AreaVirtualMeeseeks.pdf>
-Package pdftex.def Info: img/AreaVirtualMeeseeks.pdf  used on input line 336.
+Package pdftex.def Info: img/AreaVirtualMeeseeks.pdf  used on input line 333.
 (pdftex.def)             Requested size: 258.36604pt x 288.30998pt.
-LaTeX Info: Redefining \. on input line 343.
-LaTeX Info: Redefining \% on input line 343.
+LaTeX Info: Redefining \. on input line 340.
+LaTeX Info: Redefining \% on input line 340.
  [10 <./img/AreaVirtualMeeseeks.pdf
 
 pdfTeX warning: pdflatex.exe (file ./img/AreaVirtualMeeseeks.pdf): PDF inclusio
 n: invalid other resource which is no dict (key 'ProcSets', type <array>); igno
 red.
 >]
-LaTeX Info: Redefining \. on input line 369.
-LaTeX Info: Redefining \% on input line 369.
- [11]
-LaTeX Info: Redefining \. on input line 375.
-LaTeX Info: Redefining \% on input line 375.
+<img/TareasSinRickyMorty.pdf, id=294, 377.49028pt x 60.225pt>
+File: img/TareasSinRickyMorty.pdf Graphic file (type pdf)
+<use img/TareasSinRickyMorty.pdf>
+Package pdftex.def Info: img/TareasSinRickyMorty.pdf  used on input line 358.
+(pdftex.def)             Requested size: 339.7381pt x 54.20198pt.
+LaTeX Info: Redefining \. on input line 368.
+LaTeX Info: Redefining \% on input line 368.
+ [11 <./img/TareasSinRickyMorty.pdf
+
+pdfTeX warning: pdflatex.exe (file ./img/TareasSinRickyMorty.pdf): PDF inclusio
+n: invalid other resource which is no dict (key 'ProcSets', type <array>); igno
+red.
+>]
+LaTeX Info: Redefining \. on input line 376.
+LaTeX Info: Redefining \% on input line 376.
  [12]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 377.
-LaTeX Info: Redefining \. on input line 377.
-LaTeX Info: Redefining \% on input line 377.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 380.
+LaTeX Info: Redefining \. on input line 380.
+LaTeX Info: Redefining \% on input line 380.
  [13]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 377.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 380.
  (informe.aux
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 377.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 377.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 380.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 380.
 Package rerunfilecheck Info: File `informe.out' has not changed.
 (rerunfilecheck)             Checksum: F774883DD24F7295D91924DF635CD7AB;577.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 377.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 380.
  ) 
 Here is how much of TeX's memory you used:
- 9411 strings out of 480930
- 149945 string characters out of 2901168
- 433219 words of memory out of 3000000
- 25061 multiletter control sequences out of 15000+200000
+ 9414 strings out of 480930
+ 150117 string characters out of 2901168
+ 432219 words of memory out of 3000000
+ 25062 multiletter control sequences out of 15000+200000
  550502 words of font info for 47 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 46i,12n,47p,2193b,483s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 46i,12n,47p,2203b,483s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/Lu/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C
 :/Users/Lu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/bitstrea/charter/bchb8
 a.pfb><C:/Users/Lu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/bitstrea/chart
@@ -669,9 +682,9 @@ e1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Lu/AppData/Local/Programs/MiKTeX 2.9
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/Lu/AppData/Local/
 Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/Lu/Ap
 pData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on informe.pdf (13 pages, 898046 bytes).
+Output written on informe.pdf (13 pages, 944370 bytes).
 PDF statistics:
- 343 PDF objects out of 1000 (max. 8388607)
- 34 named destinations out of 1000 (max. 500000)
- 141 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 370 PDF objects out of 1000 (max. 8388607)
+ 35 named destinations out of 1000 (max. 500000)
+ 146 words of extra memory for PDF output out of 10000 (max. 10000000)
 
