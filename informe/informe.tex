@@ -168,12 +168,16 @@ Para finalizar este ejercicio, realizamos un rutina encargada de limpiar la pant
 
 \subsection{Ejercicio 2}
 \justify
-Inicialmente modificamos los archivos \textit{idt.c} e \textit{idt.h} para completar las entradas de la IDT. Definimos a la IDT como un arreglo de idt_entry_t de 255 posiciones, que primero inicializamos en cero, y el descriptor de la IDT (IDT_DESC), indicando el tamaño y la dirección de la IDT. Para inicializar las entradas de la IDT utilizamos un \textit{DEFINE} que, dado el número de la interrupción, completa los campos del descriptor de la IDT correspondiente. Para el caso de las interrupciones de software el DPL es 3, dado que las mismas deben poder ser accedidas por las tareas y en los demás casos el DPL es 0, ya que no deben poder ser accedidas por las tareas. En todos los casos el selector de segmento es de código de nivel 0. Como la dirección de las rutinas de atención (declaradas en \textbf{isr.h}) no están definidas en tiempos de compilación fue necesario definir una función llamada idt_init que inicializara las entradas de la IDT en tiempos de ejecución. Definimos 21 entradas en la IDT para las excepciones del procesador(de 0 a 20).
+Inicialmente modificamos los archivos \textit{idt.c} e \textit{idt.h} para completar las entradas de la IDT. Definimos a la IDT como un arreglo de idt_entry_t de 255 posiciones, que primero inicializamos en cero, y el descriptor de la IDT (IDT_DESC), indicando el tamaño y la dirección de la IDT. Para inicializar las entradas de la IDT utilizamos un \textit{DEFINE} que, dado el número de la interrupción, completa los campos del descriptor de la IDT correspondiente. Para el caso de las interrupciones de software el DPL es 3, dado que las mismas deben poder ser accedidas por las tareas y en los demás casos el DPL es 0, ya que no deben poder ser accedidas por las tareas. En todos los casos el selector de segmento es de código de nivel 0. El bit P queda seteado en 1 y el tipo es el correspondiente a una Interrupt Gate de 32 bits (01110b). Como la dirección de las rutinas de atención (declaradas en \textbf{isr.h}) no están definidas en tiempos de compilación fue necesario definir una función llamada idt_init que inicializara las entradas de la IDT en tiempos de ejecución. Definimos 21 entradas en la IDT para las excepciones del procesador(de 0 a 20).
 \justify
 Para imprimir las excepciones en la esquina superior izquierda de la pantalla  cuando estas ocurren, implementamos la función "print_exception", que se encuentra en el archivo \textit{screen.c}. La misma es llamada inicialmente en el código de \textit{isr.asm}, aunque luego esto será modificado como se ve en el código, ya que esta acción será realizada por el modo debug. 
 
 
-%Acá va una imagen de un descriptor de la IDT.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.6]{img/IDTdescriptor.pdf}
+	\caption{Esquema de descriptor de la IDT}
+\end{figure}
 
 
 \subsection{Ejercicio 3}
@@ -201,8 +205,22 @@ Las rutinas de interrupciones de software solo mueven a eax los números indicad
 \justify
 Para inicializar el directorio y las tablas de páginas del kernel, implementamos la función ``mmu_init_kernel_dir", que crea un directorio y una tabla de páginas (tabla_0) del tipo \textit{page_directory_entry}  y \textit{page_table_entry}, respectivamente. Estas estructuras fueron definidas en el archivo \textit{mmu.h} y siguen el formato de las entradas al directorio y a la tabla de páginas. Una vez creados los inicializamos en 0.
 \justify
-La primera entrada del directorio (directorio[0]) va a mapear a la tabla de páginas creada y esta mapeará a todo el kernel, por lo que completamos el campo de la base del directorio[0] con la dirección de la tabla de páginas. El privilegio de esta entrada es 0. Una vez mapeado el directorio a la primera tabla de páginas, mapeamos la misma al kernel, usando identity mapping. Nuevamente, el privilegio de cada entrada de la tabla de páginas es 0. Al final de la rutina devolvemos la dirección del directorio de tablas de páginas. 
+La primera entrada del directorio (directorio[0]) va a mapear a la tabla de páginas creada y esta mapeará a todo el kernel, por lo que completamos el campo de la base del directorio[0] con la dirección de la tabla de páginas. El privilegio de esta entrada es 0, el bit P queda seteado en 1, y el tipo es Read/Write. Una vez mapeado el directorio a la primera tabla de páginas, mapeamos la misma al kernel, usando identity mapping. Nuevamente, el privilegio de cada entrada de la tabla de páginas es 0, el bit P queda seteado en 1 y el tipo es Read/Write. Al final de la rutina devolvemos la dirección del directorio de tablas de páginas. 
  
+ \begin{figure}[h!]
+ 	\centering
+ 	\begin{subfigure}[b]{0.45 \textwidth}
+ 		\includegraphics[width=\textwidth]{img/pde.pdf}
+ 		\caption{Esquema de una page directory entry.}
+ 	\end{subfigure}
+ 	\hfill
+ 	\begin{subfigure}[b]{0.45 \textwidth}
+ 		\includegraphics[width=\textwidth]{img/pte.pdf}
+ 		\caption{Esquema de una page table entry.}
+ 	\end{subfigure}
+ \end{figure}
+
+\newpage 
 \justify  
 Ya creadas las funciones para inicializar el directorio y la tabla de páginas, escribimos en \textit{kernel.asm} el código necesario para activar paginación: inicializamos el manejador de memoria y el directorio de páginas mediante un call a la función ``mmu.init" \ y ``mmu_init_kernel_dir", respectivamente. Luego, cargamos en el registro cr3 la dirección del directorio y activamos paginación seteando en 1 el bit 31 de cr0.
 
@@ -212,7 +230,6 @@ Ya creadas las funciones para inicializar el directorio y la tabla de páginas, 
 	\caption{Mapeo del kernel.}
 \end{figure}
 
-\newpage
 \subsection{Ejercicio 5}
 \justify
 Inicialmente y siguiendo lo indicado por el primer item, completamos la función ``mmu_init" \ con la dirección de la primera página libre del kernel (0x100000), y luego completamos la función ``mmu_next_free_kernel_page" \ para que nos devuelva la dirección de la próxima página libre del área libre del kernel.
@@ -234,7 +251,13 @@ Para esto se crea un directorio de tablas de paǵina pidiendo la pŕoxima págin
 
 \justify
 Nuevamente modificamos la GDT, esta vez, para agregar las entradas que serán utilizadas como los descriptores de TSS necesarios. En un principio, definimos una entrada para la tarea incial y otra entrada para la tarea Idle cuyos índices en la GDT son 20 y 21 respectivamente. Las bases de estas fueron inicializadas en 0 para luego ser modificadas en tiempo de ejecución. El límite de ambas es 0x67 y está dado por el tamaño de la estructura de la tss definidida por la cátedra. En este caso, la granularidad está seteada en 0 por el tamaño del tss. El bit de AVL está seteado en 0, el bit de P en 1, y el bit de DPL está seteado en 0 ya que el task switch debería poder realizarlo unicamente el kernel. Los bits de tipo están seteados de la siguiente manera: "01001", donde podemos ver que el bit de Busy es 0. Los demás bits están seteados en 0 como indica el manual. Esta configuración va a ser utilizada para el resto de los descriptores de TSS.
-%Imagen de los descriptores.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{img/TssdescriptorManual.pdf}
+	\caption{Esquema de descriptor de la TSS.}
+\end{figure}
+
 \justify
 En el archivo \textbf{tss.h} se encuentra definida una estructura que representa la TSS de una tarea que fue proveída por la cátedra. Luego en \textbf{tss.c} definimos las TSS de la tarea inicial y la tarea Idle. La primera la llenamos con 0s y a la segunda TSS la completamos de la siguiente manera: Como comparte el mismo cr3 con el kernel, cr3 será igual a 0x25000, luego el EIP, como indica el enunciado, será 0x00018000 y EFLAGS será 0x202 (ya que las interrupciones están habilitadas). Tanto los descriptores de datos como el de pila utilizarán el descriptor de datos de nivel 0(RPL = 0) y el selector de código utilizará el descriptor de código de nivel 0(RPL = 0). Por último, el esp y el ebp están seteados en la misma que dirección que la pila del kernel(0x00025000) como lo indica el enunciado. Los demás campos están seteados en 0. Notemos que como utilizamos el cr3 del kernel, todo se encuentra mapeado con identity mapping.
 \justify
@@ -261,7 +284,13 @@ Notemos que la maxima cantidad de tareas que puede haber simultáneamente es $24
 	\item \textbf{reloj}: otro array de 22 valores, que indica $4$ estados posibles (uno por cada estado del reloj) de cada una de las tareas.   
 \end{itemize}
 El orden de las tareas en los arrays es el siguiente:
-%Poner Imagen
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.8]{img/ArrayRickyMortyIDX.pdf}
+	\caption{Esquema de array de tareas}
+\end{figure}
+
 \justify
 Ahora debemos inicializar la estructura de datos, para ello creamos un función en \textbf{sched.c} llamada ``sched_init"\ . Lo primero que realiza esta función es inicializar los estados de todas las tareas como TASK_DEAD (las tareas Rick y Morty se inician en TASK_READY en la función ``game_init" \ que luego presentaremos). Luego inicializa los indices de cada una de las tareas en la GDT, teniendo en cuenta que los índices en la GDT respetan el mismo orden que los arrays anteriormente descritos. Por último, inicia las ultimas tareas de Rick y Morty, que en esta caso son las tareas principales, e inicia turno con $1$ para que el próximo turno corresponda a Rick.
 
@@ -301,7 +330,12 @@ Modificamos la rutina de interrupción del teclado para que si el scan code dete
 \subsection{Ejercicio 8}
 \justify
 Notemos que Rick y Morty pueden poseer a lo sumo 10 Mr Meeseeks simultáneamente. Las direcciones virtuales donde debe estar el código y la pila de los Mr Meeseeks es a partir de 0x08000000. Podemos entonces definir que los espacios para cada tarea Mr Meeseeks que se pueda crear sea fijo, quedando así para cada tarea principal la siguiente asignación de espacios en su CR3:
-%Imagen en que rangos virtuales van a estar cada Mr M
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=1.1]{img/AreaVirtualMeeseeks.pdf}
+\end{figure}
+
 
 \justify
 Definimos las siguientes estructuras en \textbf{juego.h}:
