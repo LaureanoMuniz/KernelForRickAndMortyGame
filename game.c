@@ -170,7 +170,7 @@ uint32_t servicio_move(int32_t x, int32_t y){
     //es tarea Mr M
     uint32_t tarea = sched.last_task[sched.turno];
     uint32_t slot_tarea = (tarea-2)/2;
-    if(juego.max_move_Mr_M[tarea-2]/2<(uint32_t)absoluto(x)+(uint32_t)absoluto(y)){ // Si no puede moverse returneo 0 
+    if(juego.max_move_Mr_M[tarea-2]/2<=(uint32_t)absoluto(x)+(uint32_t)absoluto(y)){ // Si no puede moverse returneo 0 
         return 0;
     }
     if(x==0 && y==0){ // si no se mueve, devuelvo que fue efectivo

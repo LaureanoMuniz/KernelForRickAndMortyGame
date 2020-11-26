@@ -26,6 +26,8 @@ tss_t tss_idle = {
     .gs = GDT_OFF_D0_DESC,
     .esp = KERNEL_STACK,
     .ebp = KERNEL_STACK,
+    .iomap = 0xffff,
+    
 };
 tss_t tss_rick;
 tss_t tss_morty;
@@ -60,4 +62,5 @@ void tss_init_task(int gdt_idx, tss_t* tss, paddr_t kernel_page, paddr_t cr3,
   tss->gs = GDT_OFF_D3_DESC | RPL_3;
   tss->esp = task_code + PAGE_SIZE*pages;
   tss->ebp = task_code + PAGE_SIZE*pages;
+  tss->iomap = 0xffff;
 }
