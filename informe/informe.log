@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.9.9)  26 NOV 2020 14:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.9.9)  26 NOV 2020 15:13
 entering extended mode
 **./informe.tex
 (informe.tex
@@ -543,8 +543,8 @@ File: img/Pantalla.pdf Graphic file (type pdf)
 <use img/Pantalla.pdf>
 Package pdftex.def Info: img/Pantalla.pdf  used on input line 164.
 (pdftex.def)             Requested size: 325.2175pt x 180.22469pt.
-LaTeX Info: Redefining \. on input line 179.
-LaTeX Info: Redefining \% on input line 179.
+LaTeX Info: Redefining \. on input line 182.
+LaTeX Info: Redefining \% on input line 182.
 [4 <./img/DescriptorVideo.pdf
 
 pdfTeX warning: pdflatex.exe (file ./img/DescriptorVideo.pdf): PDF inclusion: i
@@ -628,7 +628,7 @@ al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Ivo Pajor
 ers/Ivo Pajor/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss
 bx10.pfb><C:/Users/Ivo Pajor/AppData/Local/Programs/MiKTeX/fonts/type1/public/a
 msfonts/cm/cmtt10.pfb>
-Output written on informe.pdf (12 pages, 638620 bytes).
+Output written on informe.pdf (12 pages, 638649 bytes).
 PDF statistics:
  201 PDF objects out of 1000 (max. 8388607)
  28 named destinations out of 1000 (max. 500000)
