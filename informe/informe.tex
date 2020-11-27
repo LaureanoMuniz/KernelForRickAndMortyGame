@@ -312,13 +312,25 @@ Se modificó la rutina de atención de las excepciones para que pushee todos los
 
 \justify
 La función ``imprimir_debug"\ toma como parámetros los registros de propósito general y los selectores de datos al momento de atender la excepción. Notemos que todos estos registros poseen el mismo valor que tenían antes de producirse la excepción, menos el registro ESP, que es de nivel 0. Como se produjo un cambio en el nivel de privilegio, el estado de la pila antes de pushear cualquier registro en la rutina de atención de excepciones es el siguiente:
-%Poner Imagen
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.6]{img/pilaCambioPrivilegioManual.pdf}
+	\caption{Stack de nivel 0 luego de un cambio de privilegio}
+\end{figure}
+
 Cuando hacemos un pushad el valor de ESP que se pushea es el de antes de realizar esta operación. Por ende, los elementos que se ven en la imagen están en las posiciones siguientes al ESP pusheado. Por lo cual, podemos obtener estos valores leyendo [ESP], [ESP+4], $\dots$, pero notemos que tenemos que diferenciar si la excepción tiene código de error o no. Teniendo esto en cuenta podemos obtener los valores de la pila de nivel 0. Ahora, nos falta saber los valores de los control registers, que obtendremos a partir de las funciones provistas por la cátedra ``rcr0"\, ``rcr2"\, ``rcr2"\ y ``rcr3"\ .
+
 
 \justify
 Por último debemos imprimir los valores del stack y del backtrace. Para los valores del stack utilizamos el ESP de la pila de nivel $3$ de la tarea e imprimimos los $3$ primeros valores ,teniendo en cuenta de estar en el rango de la tarea. Para el backtrace, usamos el $ebp$, asumiendo que se respeta la convención C. Con el mismo, podemos obtener con [ebp+4] la dirección de retorno de la función y con [ebp] el antiguo valor de ebp. Realizamos este proceso iterativamente 3 veces, colocando 0's si ebp o ebp+4 no estan en el rango de la tarea. Para saber si esta en el rango, utilizamos los arrays min_esp_task y max_esp_task, declarados en \textbf{game.h}, que nos indican el rango de memoria de cada tarea. Esto se puede realizar de esta manera ya que estamos utilizando segmentación flat.
 
-%Poner imagen de como queda la pila despues del armado de stackframe
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.8]{img/pila.pdf}
+	\caption{Pila luego del armado del stack frame}
+\end{figure}
+
 
 \justify
 Modificamos la rutina de interrupción del teclado para que si el scan code detecta que se presiona la tecla ``Y"\ se llame a la función ``change_state_debug"\ que se encuentra definida en \textbf{sched.c} la cual cambia los estados de debug_state como indica el enunciado y si esta mostrando en pantalla el debugger se utiliza la función ``devolver_pantalla"\ . La rutina de reloj también fue modificada para que no realice nada si debug_state es igual a $2$.

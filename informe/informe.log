@@ -1,12 +1,14 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7400 64-bit) (preloaded format=pdflatex 2020.4.26)  26 NOV 2020 18:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.10.10)  26 NOV 2020 22:09
 entering extended mode
-**./informe.tex
-(informe.tex
-LaTeX2e <2020-02-02> patch level 5
-L3 programming layer <2020-04-06>
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\article.cls"
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**informe.tex
+(./informe.tex
+LaTeX2e <2020-02-02> patch level 2
+L3 programming layer <2020-02-14>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\size10.clo"
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
 )
 \c@part=\count167
@@ -21,89 +23,80 @@ File: size10.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
 \belowcaptionskip=\skip48
 \bibindent=\dimen134
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\babel.sty"
-Package: babel 2020/03/22 3.42 The Babel package
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2020/02/14 3.40 The Babel package
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\switch.def"
-File: switch.def 2020/03/22 3.42 Babel switching mechanism
+(/usr/share/texlive/texmf-dist/tex/generic/babel/switch.def
+File: switch.def 2020/02/14 3.40 Babel switching mechanism
 )
-*************************************
-* Local config file bblopts.cfg used
-*
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/arabi\bblopts.cfg"
-File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
- babel
-)
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/babel-spanish\spanish
-.ldf"
+(/usr/share/texlive/texmf-dist/tex/generic/babel-spanish/spanish.ldf
 Language: spanish.ldf 2016/03/03 v5.0p Spanish support from the babel system
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\babel.def"
-File: babel.def 2020/03/22 3.42 Babel common definitions
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2020/02/14 3.40 Babel common definitions
 \babel@savecnt=\count175
 \U@D=\dimen135
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\txtbabel.def"
-)
+(/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@readstream=\read2
 \bbl@dirlevel=\count176
 )
-\es@quottoks=\toks15
+\es@quottoks=\toks14
 \es@quotdepth=\count177
 Package babel Info: Making " an active character on input line 561.
 Package babel Info: Making . an active character on input line 662.
 Package babel Info: Making < an active character on input line 707.
 Package babel Info: Making > an active character on input line 707.
-)) ("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\inputenc.sty"
+))
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2018/08/11 v1.3c Input encoding file
-\inpenc@prehook=\toks16
-\inpenc@posthook=\toks17
-) ("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\charter.sty"
-Package: charter 2020/03/25 PSNFSS-v9.3 (P.Dyballa) 
+\inpenc@prehook=\toks15
+\inpenc@posthook=\toks16
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\graphicx.sty
-"
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/charter.sty
+Package: charter 2005/04/12 PSNFSS-v9.2a (P.Dyballa) 
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
- ("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\keyval.sty"
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks18
+\KV@toks@=\toks17
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\graphics.sty
-"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
- ("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\trig.sty"
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics-cfg\graphics
-.cfg"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 105.
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics-def\pdftex.d
-ef"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen136
 \Gin@req@width=\dimen137
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/paralist\paralist.sty
-"
+(/usr/share/texlive/texmf-dist/tex/latex/paralist/paralist.sty
 Package: paralist 2017/01/22 v2.7 Extended list environments
 \pltopsep=\skip49
 \plpartopsep=\skip50
 \plitemsep=\skip51
 \plparsep=\skip52
-\pl@lab=\toks19
+\pl@lab=\toks18
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/caption\subcaption.st
-y"
-Package: subcaption 2020/08/23 v1.3g Sub-captions (AR)
- ("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/caption\caption.sty"
-Package: caption 2020/09/12 v3.5b Customizing captions (AR)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2020/01/22 v1.3d Sub-captions (AR)
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/caption\caption3.sty"
-Package: caption3 2020/09/17 v2.1b caption3 kernel (AR)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2020/01/03 v3.4h Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 61.
 \captionmargin=\dimen138
 \captionmargin@=\dimen139
 \captionwidth=\dimen140
@@ -119,23 +112,23 @@ Package caption Info: Standard document class detected.
 \c@subfigure=\count180
 \c@subtable=\count181
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/underscore\underscore
-.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/underscore/underscore.sty
 Package: underscore 2006/09/13
 LaTeX Info: Redefining \_ on input line 42.
-) (caratula.sty
+)
+(./caratula.sty
 Package: caratula 2005/08/09 v0.3 Para componer caratulas de TPs del DC
 
 Cargando package 'caratula' v0.3 (2005/08/09)
-\intlist=\toks20
-) ("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/url\url.sty"
+\intlist=\toks19
+) (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip16
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/ragged2e\ragged2e.sty
-"
+(/usr/share/texlive/texmf-dist/tex/latex/ragged2e/ragged2e.sty
 Package: ragged2e 2019/07/28 v2.2 ragged2e Package (MS)
- ("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/ms\everysel.sty"
+
+(/usr/share/texlive/texmf-dist/tex/latex/ms/everysel.sty
 Package: everysel 2011/10/28 v1.2 EverySelectfont Package (MS)
 )
 \CenteringLeftskip=\skip53
@@ -153,72 +146,64 @@ Package: everysel 2011/10/28 v1.2 EverySelectfont Package (MS)
 \RaggedRightParindent=\skip65
 \JustifyingParindent=\skip66
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\hyperref.sty
-"
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2020/01/14 v7.00d Hypertext links for LaTeX
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/generic/ltxcmds\ltxcmds.sty
-"
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
-) ("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/generic/iftex\iftex.sty"
-Package: iftex 2020/03/06 v1.0d TeX engine tests
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pdftexcmds\pdftexcmds
-.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2019/11/07 v1.0c TeX engine tests
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
 Package: pdftexcmds 2019/11/24 v0.31 Utility functions of pdfTeX for LuaTeX (HO
 )
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/generic/infwarerr\infwarerr
-.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/generic/kvsetkeys\kvsetkeys
-.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
 Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/generic/kvdefinekeys\kvdefi
-nekeys.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pdfescape\pdfescape
-.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
 Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hycolor\hycolor.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/letltxmacro\letltxmac
-ro.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
 Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/auxhook\auxhook.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/kvoptions\kvoptions.s
-ty"
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
 )
 \@linkdim=\dimen145
 \Hy@linkcounter=\count182
 \Hy@pagecounter=\count183
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\pd1enc.def"
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2020/01/14 v7.00d Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
-) ("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/generic/intcalc\intcalc.s
-ty"
+)
+(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/generic/etexcmds\etexcmds.s
-ty"
+(/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
 \Hy@SavedSpaceFactor=\count184
+\pdfmajorversion=\count185
 Package hyperref Info: Hyper figures OFF on input line 4547.
 Package hyperref Info: Link nesting OFF on input line 4552.
 Package hyperref Info: Hyper index ON on input line 4555.
@@ -226,19 +211,18 @@ Package hyperref Info: Plain pages OFF on input line 4562.
 Package hyperref Info: Backreferencing OFF on input line 4567.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4800.
-\c@Hy@tempcnt=\count185
+\c@Hy@tempcnt=\count186
 LaTeX Info: Redefining \url on input line 5159.
 \XeTeXLinkMargin=\dimen146
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/generic/bitset\bitset.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/generic/bigintcalc\bigintca
-lc.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count186
+\Fld@menulength=\count187
 \Field@Width=\dimen147
 \Fld@charsize=\dimen148
 Package hyperref Info: Hyper figures OFF on input line 6430.
@@ -251,33 +235,29 @@ Package hyperref Info: PDF/A mode OFF on input line 6460.
 LaTeX Info: Redefining \ref on input line 6500.
 LaTeX Info: Redefining \pageref on input line 6504.
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/generic/atbegshi\atbegshi.s
-ty"
+(/usr/share/texlive/texmf-dist/tex/generic/atbegshi/atbegshi.sty
 Package: atbegshi 2019/12/05 v1.19 At begin shipout hook (HO)
 )
-\Hy@abspage=\count187
-\c@Item=\count188
-\c@Hfootnote=\count189
+\Hy@abspage=\count188
+\c@Item=\count189
+\c@Hfootnote=\count190
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\hpdftex.def"
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2020/01/14 v7.00d Hyperref driver for pdfTeX
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/atveryend\atveryend.s
-ty"
+(/usr/share/texlive/texmf-dist/tex/latex/atveryend/atveryend.sty
 Package: atveryend 2019-12-11 v1.11 Hooks at the very end of document (HO)
 Package atveryend Info: \enddocument detected (standard20110627).
 )
-\Fld@listcount=\count190
-\c@bookmark@seq@number=\count191
+\Fld@listcount=\count191
+\c@bookmark@seq@number=\count192
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/rerunfilecheck\rerunf
-ilecheck.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/generic/uniquecounter\uniqu
-ecounter.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
@@ -285,35 +265,32 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip67
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pdfpages\pdfpages.sty
-"
+(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pdfpages.sty
 Package: pdfpages 2020/01/28 v0.5q Insert pages of external PDF documents (AM)
- ("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\ifthen.sty"
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\calc.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count192
-\calc@Bcount=\count193
+\calc@Acount=\count193
+\calc@Bcount=\count194
 \calc@Adimen=\dimen149
 \calc@Bdimen=\dimen150
 \calc@Askip=\skip68
 \calc@Bskip=\skip69
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count194
+\calc@Ccount=\count195
 \calc@Cskip=\skip70
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/eso-pic\eso-pic.sty"
-Package: eso-pic 2020/09/27 v2.0i eso-pic (RN)
-\ESO@tempdima=\dimen151
-\ESO@tempdimb=\dimen152
+(/usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2018/04/12 v2.0h eso-pic (RN)
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/xcolor\xcolor.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics-cfg\color.cf
-g"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 225.
@@ -327,37 +304,33 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 ))
-\AM@pagewidth=\dimen153
-\AM@pageheight=\dimen154
+\AM@pagewidth=\dimen151
+\AM@pageheight=\dimen152
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pdfpages\pppdftex.def
-"
+(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pppdftex.def
 File: pppdftex.def 2020/01/28 v0.5q Pdfpages driver for pdfTeX (AM)
 )
 \AM@pagebox=\box45
-\AM@global@opts=\toks21
-\AM@pagecnt=\count195
-\AM@toc@title=\toks22
-\c@AM@survey=\count196
+\AM@global@opts=\toks20
+\AM@pagecnt=\count196
+\AM@toc@title=\toks21
+\c@AM@survey=\count197
 \AM@templatesizebox=\box46
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/fancybox\fancybox.sty
-"
+(/usr/share/texlive/texmf-dist/tex/latex/fancybox/fancybox.sty
 Package: fancybox 2010/05/15 1.4
 
 Style option: `fancybox' v1.4 <2010/05/15> (tvz)
 \@fancybox=\box47
-\shadowsize=\dimen155
+\shadowsize=\dimen153
 \@Sbox=\box48
-\do@VerbBox=\toks23
-\the@fancyput=\toks24
-\this@fancyput=\toks25
-\EndVerbatimTokens=\toks26
+\do@VerbBox=\toks22
+\the@fancyput=\toks23
+\this@fancyput=\toks24
+\EndVerbatimTokens=\toks25
 \Verbatim@Outfile=\write3
 \Verbatim@Infile=\read3
-)
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/fancyhdr\fancyhdr.sty
-"
+) (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footer
 s
 \f@nch@headwidth=\skip71
@@ -370,12 +343,12 @@ s
 \f@nch@O@olf=\skip78
 \f@nch@O@orf=\skip79
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3backend\l3backend-p
-dfmode.def"
-File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count197
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
+File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count198
 \l__pdf_internal_box=\box49
-) (informe.aux
+)
+(./informe.aux
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
 )
@@ -399,72 +372,72 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 94.
 LaTeX Font Info:    ... okay on input line 94.
 LaTeX Font Info:    Trying to load font information for OT1+bch on input line 9
 4.
-
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ot1bch.fd"
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1bch.fd
 File: ot1bch.fd 2004/10/18 font definitions for OT1/bch.
 )
 LaTeX Info: Redefining \. on input line 94.
 LaTeX Info: Redefining \% on input line 94.
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/context/base/mkii\supp-pdf.
-mkii"
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count198
-\scratchdimen=\dimen156
+\scratchcounter=\count199
+\scratchdimen=\dimen154
 \scratchbox=\box50
-\nofMPsegments=\count199
-\nofMParguments=\count266
-\everyMPshowfont=\toks27
-\MPscratchCnt=\count267
-\MPscratchDim=\dimen157
-\MPnumerator=\count268
-\makeMPintoPDFobject=\count269
-\everyMPtoPDFconversion=\toks28
-)
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/epstopdf-pkg\epstopdf
--base.sty"
+\nofMPsegments=\count266
+\nofMParguments=\count267
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count268
+\MPscratchDim=\dimen155
+\MPnumerator=\count269
+\makeMPintoPDFobject=\count270
+\everyMPtoPDFconversion=\toks27
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
-)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
- ABD: EverySelectfont initializing macros
+
+ABD: EverySelectfont initializing macros
 LaTeX Info: Redefining \selectfont on input line 94.
 \AtBeginShipoutBox=\box51
 Package hyperref Info: Link coloring OFF on input line 94.
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\nameref.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/refcount\refcount.sty
-"
+
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 )
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/generic/gettitlestring\gett
-itlestring.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count270
+\c@section@level=\count271
 )
 LaTeX Info: Redefining \ref on input line 94.
 LaTeX Info: Redefining \pageref on input line 94.
 LaTeX Info: Redefining \nameref on input line 94.
- (informe.out) (informe.out)
+
+(./informe.out) (./informe.out)
 \@outlinefile=\write4
 \openout4 = `informe.out'.
 
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pdflscape\pdflscape.s
-ty"
+(/usr/share/texlive/texmf-dist/tex/latex/pdflscape/pdflscape.sty
 Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
 
-("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\lscape.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
 Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-<img/logodc.jpg, id=43, 215.6055pt x 83.5923pt>
+<img/logodc.jpg, id=44, 215.6055pt x 83.5923pt>
 File: img/logodc.jpg Graphic file (type jpg)
 <use img/logodc.jpg>
 Package pdftex.def Info: img/logodc.jpg  used on input line 107.
@@ -473,7 +446,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 107.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 107.
-<img/logouba.jpg, id=44, 225.4824pt x 231.7458pt>
+<img/logouba.jpg, id=45, 225.4824pt x 231.7458pt>
 File: img/logouba.jpg Graphic file (type jpg)
 <use img/logouba.jpg>
 Package pdftex.def Info: img/logouba.jpg  used on input line 107.
@@ -490,8 +463,8 @@ Overfull \hbox (22.76358pt too wide) in paragraph at lines 107--107
 
 [1
 
-{C:/Users/Lu/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./img/logodc.j
-pg> <./img/logouba.jpg>] (informe.toc
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./img/logodc.jpg> <./img/l
+ogouba.jpg>] (./informe.toc
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 )
@@ -499,7 +472,7 @@ LaTeX Info: Redefining \% on input line 1.
 \openout5 = `informe.toc'.
 
  [2]
-<img/GDTdescriptor.pdf, id=70, 361.35pt x 130.5678pt>
+<img/GDTdescriptor.pdf, id=71, 361.35pt x 130.5678pt>
 File: img/GDTdescriptor.pdf Graphic file (type pdf)
 <use img/GDTdescriptor.pdf>
 Package pdftex.def Info: img/GDTdescriptor.pdf  used on input line 141.
@@ -508,24 +481,25 @@ LaTeX Info: Redefining \. on input line 152.
 LaTeX Info: Redefining \% on input line 152.
  [3 <./img/GDTdescriptor.pdf
 
-pdfTeX warning: pdflatex.exe (file ./img/GDTdescriptor.pdf): PDF inclusion: inv
-alid other resource which is no dict (key 'ProcSets', type <array>); ignored.
+pdfTeX warning: /usr/bin/pdflatex (file ./img/GDTdescriptor.pdf): PDF inclusion
+: invalid other resource which is no dict (key 'ProcSets', type <array>); ignor
+ed.
 >]
-<img/DescriptorVideo.pdf, id=94, 361.35pt x 130.5678pt>
+<img/DescriptorVideo.pdf, id=95, 361.35pt x 130.5678pt>
 File: img/DescriptorVideo.pdf Graphic file (type pdf)
 <use img/DescriptorVideo.pdf>
 Package pdftex.def Info: img/DescriptorVideo.pdf  used on input line 155.
 (pdftex.def)             Requested size: 289.0804pt x 104.45436pt.
 
 
-pdfTeX warning: pdflatex.exe (file ./img/Pantalla.pdf): PDF inclusion: found PD
-F version <1.7>, but at most version <1.5> allowed
-<img/Pantalla.pdf, id=95, 542.025pt x 300.3722pt>
+pdfTeX warning: /usr/bin/pdflatex (file ./img/Pantalla.pdf): PDF inclusion: fou
+nd PDF version <1.7>, but at most version <1.5> allowed
+<img/Pantalla.pdf, id=96, 542.025pt x 300.3722pt>
 File: img/Pantalla.pdf Graphic file (type pdf)
 <use img/Pantalla.pdf>
 Package pdftex.def Info: img/Pantalla.pdf  used on input line 164.
 (pdftex.def)             Requested size: 325.2175pt x 180.22469pt.
-<img/IDTdescriptor.pdf, id=96, 361.35pt x 130.5678pt>
+<img/IDTdescriptor.pdf, id=97, 361.35pt x 130.5678pt>
 File: img/IDTdescriptor.pdf Graphic file (type pdf)
 <use img/IDTdescriptor.pdf>
 Package pdftex.def Info: img/IDTdescriptor.pdf  used on input line 178.
@@ -534,16 +508,16 @@ LaTeX Info: Redefining \. on input line 180.
 LaTeX Info: Redefining \% on input line 180.
 [4 <./img/DescriptorVideo.pdf
 
-pdfTeX warning: pdflatex.exe (file ./img/DescriptorVideo.pdf): PDF inclusion: i
-nvalid other resource which is no dict (key 'ProcSets', type <array>); ignored.
-
+pdfTeX warning: /usr/bin/pdflatex (file ./img/DescriptorVideo.pdf): PDF inclusi
+on: invalid other resource which is no dict (key 'ProcSets', type <array>); ign
+ored.
 > <./img/Pantalla.pdf>]
-<img/pde.pdf, id=128, 367.3725pt x 74.1972pt>
+<img/pde.pdf, id=129, 367.3725pt x 74.1972pt>
 File: img/pde.pdf Graphic file (type pdf)
 <use img/pde.pdf>
 Package pdftex.def Info: img/pde.pdf  used on input line 213.
 (pdftex.def)             Requested size: 223.0721pt x 45.05415pt.
-<img/pte.pdf, id=129, 367.3725pt x 74.1972pt>
+<img/pte.pdf, id=130, 367.3725pt x 74.1972pt>
 File: img/pte.pdf Graphic file (type pdf)
 <use img/pte.pdf>
 Package pdftex.def Info: img/pte.pdf  used on input line 218.
@@ -556,13 +530,14 @@ LaTeX Info: Redefining \. on input line 223.
 LaTeX Info: Redefining \% on input line 223.
 [5 <./img/IDTdescriptor.pdf
 
-pdfTeX warning: pdflatex.exe (file ./img/IDTdescriptor.pdf): PDF inclusion: inv
-alid other resource which is no dict (key 'ProcSets', type <array>); ignored.
+pdfTeX warning: /usr/bin/pdflatex (file ./img/IDTdescriptor.pdf): PDF inclusion
+: invalid other resource which is no dict (key 'ProcSets', type <array>); ignor
+ed.
 >]
 
-pdfTeX warning: pdflatex.exe (file ./img/MapearKernel.pdf): PDF inclusion: foun
-d PDF version <1.7>, but at most version <1.5> allowed
-<img/MapearKernel.pdf, id=152, 1023.07219pt x 324.46219pt>
+pdfTeX warning: /usr/bin/pdflatex (file ./img/MapearKernel.pdf): PDF inclusion:
+ found PDF version <1.7>, but at most version <1.5> allowed
+<img/MapearKernel.pdf, id=154, 1023.07219pt x 324.46219pt>
 File: img/MapearKernel.pdf Graphic file (type pdf)
 <use img/MapearKernel.pdf>
 Package pdftex.def Info: img/MapearKernel.pdf  used on input line 229.
@@ -576,14 +551,14 @@ LaTeX Info: Redefining \. on input line 242.
 LaTeX Info: Redefining \% on input line 242.
 [6 <./img/pde.pdf
 
-pdfTeX warning: pdflatex.exe (file ./img/pde.pdf): PDF inclusion: invalid other
- resource which is no dict (key 'ProcSets', type <array>); ignored.
+pdfTeX warning: /usr/bin/pdflatex (file ./img/pde.pdf): PDF inclusion: invalid 
+other resource which is no dict (key 'ProcSets', type <array>); ignored.
 > <./img/pte.pdf
 
-pdfTeX warning: pdflatex.exe (file ./img/pte.pdf): PDF inclusion: invalid other
- resource which is no dict (key 'ProcSets', type <array>); ignored.
+pdfTeX warning: /usr/bin/pdflatex (file ./img/pte.pdf): PDF inclusion: invalid 
+other resource which is no dict (key 'ProcSets', type <array>); ignored.
 > <./img/MapearKernel.pdf>]
-<img/TssdescriptorManual.pdf, id=209, 361.35pt x 130.5678pt>
+<img/TssdescriptorManual.pdf, id=211, 361.35pt x 130.5678pt>
 File: img/TssdescriptorManual.pdf Graphic file (type pdf)
 <use img/TssdescriptorManual.pdf>
 Package pdftex.def Info: img/TssdescriptorManual.pdf  used on input line 254.
@@ -592,99 +567,123 @@ LaTeX Info: Redefining \. on input line 264.
 LaTeX Info: Redefining \% on input line 264.
  [7 <./img/TssdescriptorManual.pdf
 
-pdfTeX warning: pdflatex.exe (file ./img/TssdescriptorManual.pdf): PDF inclusio
-n: invalid other resource which is no dict (key 'ProcSets', type <array>); igno
-red.
+pdfTeX warning: /usr/bin/pdflatex (file ./img/TssdescriptorManual.pdf): PDF inc
+lusion: invalid other resource which is no dict (key 'ProcSets', type <array>);
+ ignored.
 >]
 LaTeX Font Info:    Trying to load font information for TS1+bch on input line 2
 76.
- ("C:\Users\Lu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ts1bch.fd"
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1bch.fd
 File: ts1bch.fd 2004/10/18 font definitions for TS1/bch.
 )
-<img/ArrayRickyMortyIDX.pdf, id=233, 377.49028pt x 60.225pt>
+<img/ArrayRickyMortyIDX.pdf, id=235, 377.49028pt x 60.225pt>
 File: img/ArrayRickyMortyIDX.pdf Graphic file (type pdf)
 <use img/ArrayRickyMortyIDX.pdf>
 Package pdftex.def Info: img/ArrayRickyMortyIDX.pdf  used on input line 287.
 (pdftex.def)             Requested size: 301.99263pt x 48.18005pt.
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 LaTeX Info: Redefining \. on input line 296.
 LaTeX Info: Redefining \% on input line 296.
 [8]
-LaTeX Info: Redefining \. on input line 317.
-LaTeX Info: Redefining \% on input line 317.
+<img/pilaCambioPrivilegioManual.pdf, id=241, 581.2917pt x 258.9675pt>
+File: img/pilaCambioPrivilegioManual.pdf Graphic file (type pdf)
+<use img/pilaCambioPrivilegioManual.pdf>
+Package pdftex.def Info: img/pilaCambioPrivilegioManual.pdf  used on input line
+ 318.
+(pdftex.def)             Requested size: 348.77771pt x 155.38168pt.
+LaTeX Info: Redefining \. on input line 320.
+LaTeX Info: Redefining \% on input line 320.
  [9 <./img/ArrayRickyMortyIDX.pdf
 
-pdfTeX warning: pdflatex.exe (file ./img/ArrayRickyMortyIDX.pdf): PDF inclusion
-: invalid other resource which is no dict (key 'ProcSets', type <array>); ignor
-ed.
+pdfTeX warning: /usr/bin/pdflatex (file ./img/ArrayRickyMortyIDX.pdf): PDF incl
+usion: invalid other resource which is no dict (key 'ProcSets', type <array>); 
+ignored.
 >]
-<img/AreaVirtualMeeseeks.pdf, id=269, 234.8775pt x 262.0992pt>
+<img/pila.pdf, id=272, 168.63pt x 146.4672pt>
+File: img/pila.pdf Graphic file (type pdf)
+<use img/pila.pdf>
+Package pdftex.def Info: img/pila.pdf  used on input line 330.
+(pdftex.def)             Requested size: 134.90417pt x 117.1739pt.
+LaTeX Info: Redefining \. on input line 342.
+LaTeX Info: Redefining \% on input line 342.
+ [10 <./img/pilaCambioPrivilegioManual.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ./img/pilaCambioPrivilegioManual.pdf): 
+PDF inclusion: invalid other resource which is no dict (key 'ProcSets', type <a
+rray>); ignored.
+> <./img/pila.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ./img/pila.pdf): PDF inclusion: invalid
+ other resource which is no dict (key 'ProcSets', type <array>); ignored.
+>]
+<img/AreaVirtualMeeseeks.pdf, id=310, 234.8775pt x 262.0992pt>
 File: img/AreaVirtualMeeseeks.pdf Graphic file (type pdf)
 <use img/AreaVirtualMeeseeks.pdf>
-Package pdftex.def Info: img/AreaVirtualMeeseeks.pdf  used on input line 333.
+Package pdftex.def Info: img/AreaVirtualMeeseeks.pdf  used on input line 345.
 (pdftex.def)             Requested size: 258.36604pt x 288.30998pt.
-LaTeX Info: Redefining \. on input line 340.
-LaTeX Info: Redefining \% on input line 340.
- [10 <./img/AreaVirtualMeeseeks.pdf
+LaTeX Info: Redefining \. on input line 362.
+LaTeX Info: Redefining \% on input line 362.
+ [11 <./img/AreaVirtualMeeseeks.pdf
 
-pdfTeX warning: pdflatex.exe (file ./img/AreaVirtualMeeseeks.pdf): PDF inclusio
-n: invalid other resource which is no dict (key 'ProcSets', type <array>); igno
-red.
+pdfTeX warning: /usr/bin/pdflatex (file ./img/AreaVirtualMeeseeks.pdf): PDF inc
+lusion: invalid other resource which is no dict (key 'ProcSets', type <array>);
+ ignored.
 >]
-<img/TareasSinRickyMorty.pdf, id=294, 377.49028pt x 60.225pt>
+<img/TareasSinRickyMorty.pdf, id=334, 377.49028pt x 60.225pt>
 File: img/TareasSinRickyMorty.pdf Graphic file (type pdf)
 <use img/TareasSinRickyMorty.pdf>
-Package pdftex.def Info: img/TareasSinRickyMorty.pdf  used on input line 358.
+Package pdftex.def Info: img/TareasSinRickyMorty.pdf  used on input line 370.
 (pdftex.def)             Requested size: 339.7381pt x 54.20198pt.
-LaTeX Info: Redefining \. on input line 368.
-LaTeX Info: Redefining \% on input line 368.
- [11 <./img/TareasSinRickyMorty.pdf
+LaTeX Info: Redefining \. on input line 384.
+LaTeX Info: Redefining \% on input line 384.
+ [12 <./img/TareasSinRickyMorty.pdf
 
-pdfTeX warning: pdflatex.exe (file ./img/TareasSinRickyMorty.pdf): PDF inclusio
-n: invalid other resource which is no dict (key 'ProcSets', type <array>); igno
-red.
+pdfTeX warning: /usr/bin/pdflatex (file ./img/TareasSinRickyMorty.pdf): PDF inc
+lusion: invalid other resource which is no dict (key 'ProcSets', type <array>);
+ ignored.
 >]
-LaTeX Info: Redefining \. on input line 376.
-LaTeX Info: Redefining \% on input line 376.
- [12]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 380.
-LaTeX Info: Redefining \. on input line 380.
-LaTeX Info: Redefining \% on input line 380.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 392.
+LaTeX Info: Redefining \. on input line 392.
+LaTeX Info: Redefining \% on input line 392.
  [13]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 380.
- (informe.aux
+LaTeX Info: Redefining \. on input line 392.
+LaTeX Info: Redefining \% on input line 392.
+ [14]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 392.
+ (./informe.aux
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 380.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 380.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 392.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 392.
 Package rerunfilecheck Info: File `informe.out' has not changed.
 (rerunfilecheck)             Checksum: F774883DD24F7295D91924DF635CD7AB;577.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 380.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 392.
  ) 
 Here is how much of TeX's memory you used:
- 9414 strings out of 480930
- 150117 string characters out of 2901168
- 432219 words of memory out of 3000000
- 25062 multiletter control sequences out of 15000+200000
- 550502 words of font info for 47 fonts, out of 3000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 46i,12n,47p,2203b,483s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/Lu/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C
-:/Users/Lu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/bitstrea/charter/bchb8
-a.pfb><C:/Users/Lu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/bitstrea/chart
-er/bchr8a.pfb><C:/Users/Lu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/bitstr
-ea/charter/bchri8a.pfb><C:/Users/Lu/AppData/Local/Programs/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Lu/AppData/Local/Programs/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Lu/AppData/Local/Programs/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/Lu/AppData/Local/
-Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/Lu/Ap
-pData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on informe.pdf (13 pages, 944370 bytes).
+ 9305 strings out of 483007
+ 143772 string characters out of 5961756
+ 421816 words of memory out of 5000000
+ 24116 multiletter control sequences out of 15000+600000
+ 550502 words of font info for 47 fonts, out of 8000000 for 9000
+ 107 hyphenation exceptions out of 8191
+ 48i,12n,46p,2201b,546s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
+e/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/bitstrea/charter/bchri8a.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+tt10.pfb>
+Output written on informe.pdf (14 pages, 987951 bytes).
 PDF statistics:
- 370 PDF objects out of 1000 (max. 8388607)
- 35 named destinations out of 1000 (max. 500000)
- 146 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 415 PDF objects out of 1000 (max. 8388607)
+ 317 compressed objects within 4 object streams
+ 38 named destinations out of 1000 (max. 500000)
+ 156 words of extra memory for PDF output out of 10000 (max. 10000000)
 
