@@ -131,7 +131,7 @@ modo_protegido:
     ;.fin:
     ;mov ax, GDT_OFF_D0_DESC
     ;mov ds, ax
-    xchg bx,bx
+    
     call inicializar_pantalla ;Fijarse si puedo usar un selector de segmento en C. No
     ; Inicializar el manejador de memoria
     
@@ -139,7 +139,7 @@ modo_protegido:
     ; Inicializar el directorio de paginas
     
     call mmu_init_kernel_dir ; Deja en eax la direccion fisica del directorio de tablas
-    xchg bx, bx
+    
 
     ; Cargar directorio de paginas
     mov cr3, eax
@@ -161,7 +161,7 @@ modo_protegido:
     call sched_init
 
     ; Inicializar la IDT
-    xchg bx, bx
+    
     call idt_init
     
     ; Cargar IDT
@@ -177,7 +177,7 @@ modo_protegido:
     mov ax, GDT_SEL_TSS_INIT ; muevo selector de segmento de tss_init
     ltr ax
     
-    xchg bx, bx
+    
     call game_init
     ; Habilitar interrupciones
     sti 

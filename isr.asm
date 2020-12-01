@@ -45,7 +45,6 @@ extern servicio_portal_gun
 global _isr%1
 
 _isr%1:
-    xchg bx, bx
     pushad      ;pusheo registros generales    
     mov ax, ds 
     push eax
@@ -106,7 +105,6 @@ _isr32:
     je .fin
 
     call next_clock
-    xchg bx, bx 
     call actualizar_pantalla
     
     ;;Scheduler
