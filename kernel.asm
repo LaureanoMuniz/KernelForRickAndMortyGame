@@ -177,8 +177,9 @@ modo_protegido:
     mov ax, GDT_SEL_TSS_INIT ; muevo selector de segmento de tss_init
     ltr ax
     
-    
+    ;Iniciar juego
     call game_init
+    
     ; Habilitar interrupciones
     sti 
 
