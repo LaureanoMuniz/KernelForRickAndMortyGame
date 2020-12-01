@@ -83,24 +83,6 @@ paddr_t mmu_init_kernel_dir(void) {
  	pt[tableIndex].read_write = (uint8_t) (attrs & 2) >> 1;
  	pt[tableIndex].user_supervisor = (uint8_t)(attrs & 4) >> 2;
  	tlbflush();
-
-
-
-
-/*
-  uint8_t present : 1;
-  uint8_t read_write : 1;
-  uint8_t user_supervisor : 1;
-  uint8_t pwt  : 1;
-  uint8_t pcd : 1;
-  uint8_t A : 1;
-  uint8_t dirty : 1;
-  uint8_t pat : 1;
-  uint8_t global : 1;
-  uint8_t ignorados : 3;
-  uint32_t base : 20;
-*/
-
  }
 
 
