@@ -10,7 +10,7 @@
 BITS 32
 
 sched_task_offset:     dd 0x00000000
-sched_task_selector:   dw 0xFFFF  ;; Selector de Tarea Idle
+sched_task_selector:   dw 0x0000  
 
 
 global _isr32
@@ -59,7 +59,10 @@ _isr%1:
     call copiar_pantalla
     cmp DWORD [debug_state], 1
     jne .no_debug
-    call imprimir_debug ;Se rompe no hace falta arreglar pila?
+
+    mov DWORD [debug_state], 2
+    call imprimir_debug 
+    
     .no_debug:
     ;call print_exception
     call sched_desalojar

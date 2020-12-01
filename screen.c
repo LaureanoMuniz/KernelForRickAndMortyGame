@@ -206,8 +206,7 @@ void imprimir_debug(uint32_t num_excepcion, uint8_t gs, uint8_t fs, uint8_t es, 
     eflags = pila[2];
     esp = pila[3];
     ss = pila[4];
-  }
-  debug_state=2; 
+  } 
   //  Imprime bloque negro
   uint32_t initFila = 1;
   uint32_t initCol  = 20;
