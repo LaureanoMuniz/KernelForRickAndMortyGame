@@ -40,7 +40,12 @@
 \usepackage{ragged2e}
 \usepackage{hyperref}
 \usepackage{pdfpages}
-
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	filecolor=magenta,      
+	urlcolor=cyan,
+}
 
 % ********************************************************* %
 % ~~~~~~~~              Code snippets             ~~~~~~~~~ %
@@ -271,25 +276,33 @@ Notemos que la máxima cantidad de tareas que puede haber simultáneamente es $2
 \begin{itemize}
 	\item \textbf{Turno}: es un valor que nos indica si el turno es de Rick o de alguno de sus Mr. Meeseks, o el turno es de Morty o de alguno de sus Mr. Meeseeks. Es $0$ si es turno de una tarea de Rick y $1$ si es de una tarea de Morty.
 	\item \textbf{last_task}: es un array de dos valores, el de la primera posición representa la ultima tarea de Rick ejecutada y en la segunda posición la ultima tarea de Morty ejecutada.
-	\item \textbf{state}: es un array con 22 valores (la máxima cantidad de tareas simultáneas) que nos indica el estado de cada una de las tareas. Cada tarea puede estar en $3$ estados:
+	\item \textbf{state}: es un array con 22 valores (la máxima cantidad de tareas simultáneas que nos interesan) que nos indica el estado de cada una de las tareas. Cada tarea puede estar en $3$ estados:
 	\begin{itemize}
 		\item \textbf{TASK_DEAD}: representa que la tarea está muerta, es decir, el scheduler no debe darle tiempo.
 		\item \textbf{TASK_READY}: representa que la tarea está lista para ser ejecutada y por ende está viva.
-		\item \textbf{TASK_EJEC}: representa que la tarea fue la última que se ejecutó o que se está ejecutando. Sin tener en cuenta Idle (este estado no fue necesario).
+		\item \textbf{TASK_EJEC}: representa que la tarea fue la última que se ejecutó o que se está ejecutando, sin tener en cuenta Idle.
 	\end{itemize} 
-	\item \textbf{idx_gdt}: al igual que el anterior es un array de 22 valores, que indica cual es el índice del descriptor de TSS de cada una de las tareas en la GDT. Por ende, podemos obtener un selector de una TSS shifteando hacia la izquierda el índice de la tarea en la GDT.
-	\item \textbf{reloj}: otro array de 22 valores, que indica $4$ estados posibles (uno por cada estado del reloj) de cada una de las tareas.   
+	\item \textbf{idx_gdt}: al igual que el anterior es un array de 22 valores, que indica el índice del descriptor de TSS de cada una de las tareas en la GDT. Con esto, podemos obtener un selector de una TSS shifteando hacia la izquierda el índice de la tarea en la GDT.
+	\item \textbf{reloj}: otro array de 22 valores que indica $4$ estados posibles (uno por cada estado del reloj) de cada una de las tareas.   
 \end{itemize}
-El orden de las tareas en los arrays es el siguiente:
+El orden de las tareas en los arrays es el indicado por la figura \ref{fig:array_tarea}. Para poder incluir todos los descriptores de TSS de cada una de las tareas, se modifico el tamaño de la GDT por 50. Este valor podría ser menor.
+
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.8]{img/ArrayRickyMortyIDX.pdf}
+	\includegraphics[scale=1.0]{img/ArrayRickyMortyIDX.pdf}
 	\caption{Esquema de array de tareas}
+	\label{fig:array_tarea}
 \end{figure}
 
 \justify
-Ahora debemos inicializar la estructura de datos, para ello creamos un función en \textbf{sched.c} llamada ``sched_init"\ . Lo primero que realiza esta función es inicializar los estados de todas las tareas como TASK_DEAD (las tareas Rick y Morty se inician en TASK_READY en la función ``game_init" \ que luego presentaremos). Luego inicializa los índices de cada una de las tareas en la GDT, teniendo en cuenta que los índices en la GDT respetan el mismo orden que los arrays anteriormente descritos. Por último, inicia las últimas tareas de Rick y Morty, que en este caso son las tareas principales, e inicia turno con $1$ para que el próximo turno corresponda a Rick.
+
+
+\justify
+Ahora debemos inicializar la estructura de datos, para ello creamos un función en \textbf{sched.c} llamada ``sched_init"\ . Lo primero que realiza esta función es inicializar los estados de todas las tareas como TASK_DEAD (las tareas Rick y Morty se inician en TASK_READY en la función ``game_init" \ que luego presentaremos). Luego, inicializa los índices de cada una de las tareas en la GDT, teniendo en cuenta que los índices en la GDT respetan el mismo orden que los arrays anteriormente descritos. Por último, inicia las últimas tareas de Rick y Morty, que en este caso son las tareas principales, e inicia turno con $1$ para que el próximo turno corresponda a Rick. Los valores de los relojes están por default en 0.
+
+
+
 
 \justify
 Siguiendo lo indicado en el item b creamos un función ``sched_next_task"\ encargada de devolver el selector de segmento de TSS de la siguiente tarea a ejecutar. Si el juego terminó, es decir alguna tarea principal fue desalojada o si capturaron todas las megasemillas (esto lo vamos a explicar mejor en el ejercicio $8$), devolvemos el selector de la tarea Idle. En caso contrario, el juego no terminó por ende actualizamos el estado de la última tarea que ejecutó (si sigue viva). Luego, cambiamos el turno y buscamos la próxima tarea a ejecutar que pertenezca al turno actual. Para esto, realizamos una búsqueda lineal y, si nos pasamos de rango, volvemos al principio. Una vez encontrada la próxima tarea a ejecutar actualizamos last_task del turno actual. Si la siguiente tarea a ejecutar es un Mr. Meeseeks, actualizamos la máxima cantidad de casillas que se puede mover (se explicara más en el ejercicio $8$). Por último, actualizamos el estado de la próxima tarea a ejecutar, cambiamos el estado del reloj de la misma y devolvemos el selector de su TSS (RPL=0).
