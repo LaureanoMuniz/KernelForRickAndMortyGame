@@ -320,7 +320,7 @@ Para implementar el debugger utilizamos la variable debug_state. Esta puede toma
 \justify
 Creamos dos funciones ``copiar_pantalla"\ y ``devolver_pantalla"\ en \textbf{screen.c} y una matriz de píxeles de 50x80 llamada copia_de_pantalla. Al llamar a ``copiar_pantalla"\ se copian los píxeles actuales de la pantalla en copia_de_pantalla y al llamar a ``devolver_pantalla"\ se pinta la pantalla con los píxeles indicados por copia_de_pantalla.
 \justify
-Se modificó la rutina de atención de las excepciones para que pushee todos los registros de propósito generales con un pushad, luego se pushearon los registros de segmento de datos y por último el número de excepción que ocurrió. Luego de esto, se llama a copiar pantalla, se chequea si el estado de debug_state es $1$ y en caso de que lo sea se llama a ``imprimir_debug"\ que se encuentra definido en \textbf{screen.c} y se actualiza el valor de debug\_state. Por ultimo, independientemente del valor de debug_state se desaloja la tarea actual llamando a ``sched_desalojar"\, la cual se encargara de saltar a la tarea Idle. Notemos que no restauramos la pila, ya que la tarea actual nunca mas será atendida por el scheduler, a menos que se la vuelva a crear si es una tarea Mr Meeseeks, pero en este caso será una tarea limpia.
+Se modificó la rutina de atención de las excepciones para que pushee todos los registros de propósito generales con un pushad, luego se pushearon los registros de segmento de datos y por último el número de excepción que ocurrió. Luego de esto, se llama a copiar pantalla, se chequea si el estado de debug_state es $1$ y en caso de que lo sea se llama a ``imprimir_debug"\ que se encuentra definido en \textbf{screen.c} y se actualiza el valor de debug\_state. Por ultimo, independientemente del valor de debug_state se desaloja la tarea actual llamando a ``sched_desalojar"\, la cual se encargara de saltar a la tarea Idle. Notemos que no restauramos la pila, ya que la tarea actual nunca mas será atendida por el scheduler, a menos que se la vuelva a crear si es una tarea Mr. Meeseeks, pero en este caso será una tarea limpia.
 
 \justify
 La función ``imprimir_debug"\ toma como parámetros los registros de propósito general y los registros de segmento de datos al momento de atender la excepción. Notemos que todos estos registros poseen el mismo valor que tenían antes de producirse la excepción, menos el registro ESP, que es de nivel 0. Como se produjo un cambio en el nivel de privilegio, el estado de la pila antes de pushear cualquier registro en la rutina de atención de excepciones es el siguiente:
@@ -352,7 +352,7 @@ Modificamos la rutina de interrupción del teclado para que si el scan code dete
 
 \subsection{Ejercicio 8}
 \justify
-Notemos que Rick y Morty pueden poseer a lo sumo 10 Mr Meeseeks simultáneamente. Las direcciones virtuales donde debe estar el código y la pila de los Mr Meeseeks es a partir de 0x08000000. Podemos entonces definir un espacio fijo para cada tarea Mr Meeseeks que se pueda crear, quedando así para cada tarea principal la siguiente asignación de espacios en su CR3:
+Notemos que Rick y Morty pueden poseer a lo sumo 10 Mr. Meeseeks simultáneamente. Las direcciones virtuales donde debe estar el código y la pila de los Mr. Meeseeks es a partir de 0x08000000. Podemos entonces definir un espacio fijo para cada tarea Mr Meeseeks que se pueda crear, quedando así para cada tarea principal la siguiente asignación de espacios en su CR3:
 
 \begin{figure}[h]
 	\centering
@@ -367,18 +367,18 @@ Definimos las siguientes estructuras en \textbf{game.h}:
 	\item \textbf{posicion}: posee dos valores (x, y) que representan una posición en el mapa.
 	\item \textbf{juego}: posee los siguientes datos:
 	\begin{itemize}
-		\item \textbf{posiciones_Mr_M}: un array de posiciones de tamaño 20 (igual a la cantidad máxima de tareas Mr Meeseeks), que indica en qué posición esta cada tarea Mr Meeseeks, si es que se encuentra viva.
+		\item \textbf{posiciones_Mr_M}: un array de posiciones de tamaño 20 (igual a la cantidad máxima de tareas Mr Meeseeks), que indica en qué posición está cada tarea Mr Meeseeks, si es que se encuentra viva.
 		\item \textbf{posicion_Megasemillas}: un array de tamaño 40 (igual a la cantidad de Megasemillas iniciales), que indica en qué posición se encuentran las Megasemillas. Si la semilla no se encuentra más en el mapa se guarda el valor -1 en x e y (como son unsigend int este valor es 0xFFFFFFFF).
 		\item \textbf{cant_Megasemillas}: contiene la cantidad de Megasemillas que se encuentran en el mapa actualmente.
 		\item \textbf{puntajes}: es un array de dos valores. El primero indica el puntaje de Rick y el segundo el de Morty.
 		\item \textbf{page_stack0_Mr_M}: es un array de tamaño 20 que contiene las direcciones de las páginas para las pilas de nivel 0 de cada tarea. Se podría usar una nueva página para cada nueva tarea que se crea, pero esto sería ineficiente ya que podemos reutilizarlas.
 		\item \textbf{color_players}: es un array de dos valores. El primer valor representa el color de Rick, y el segundo el color de Morty.
-		\item \textbf{max_move_Mr_M}: es un array de tamaño 20 que  indica el máximo movimiento que puede realizar cada tarea Mr Meeseeks con la syscall Move. Este valor no se guarda explícitamente, sino que cuando se crea un Mr Meeseeks en este array se guarda el valor 16. Luego, cada vez que el scheduler indique que la próxima tarea a ejecutar es un Mr Meeseeks se reduce el valor de esta tarea en el array en 1, a menos que sea igual a 2. Entonces el máximo movimiento que puede realizar un Mr Meeseeks es en realidad este valor divido $2$.
-		\item \textbf{uso_portal_gun}: es un array de 20 posiciones que indica si una tarea Mr Meeseeks ya uso la syscall use_portal_gun.
-		\item \textbf{cr3_players}: es un array de dos posiciones. En la primera contiene el CR3 de la tarea Rick, y en la segunda posición el CR3 de la tarea Morty.
+		\item \textbf{max_move_Mr_M}: es un array de tamaño 20 que  indica el máximo movimiento que puede realizar cada tarea Mr Meeseeks con la syscall Move. Este valor no se guarda explícitamente, sino que cuando se crea un Mr Meeseeks en este array se guarda el valor 16. Luego, cada vez que el scheduler indique que la próxima tarea a ejecutar es un Mr. Meeseeks se reduce el valor de esta tarea en el array en 1, a menos que sea igual a 2. Entonces el máximo movimiento que puede realizar un Mr. Meeseeks es en realidad este valor divido $2$.
+		\item \textbf{uso_portal_gun}: es un array de 20 posiciones que indica si una tarea Mr. Meeseeks ya uso la syscall use_portal_gun.
+		\item \textbf{cr3_players}: es un array de dos posiciones. En la primera contiene el CR3 de la tarea Rick, y en la segunda el CR3 de la tarea Morty.
 	\end{itemize}
 \end{itemize}
-Los arrays que contienen datos sobre los Mr Meeseeks tendrán el siguiente orden de tareas:
+Los arrays que contienen datos sobre los Mr. Meeseeks tendrán el siguiente orden de tareas:
 
 \begin{figure}[h]
 	\centering
@@ -387,13 +387,13 @@ Los arrays que contienen datos sobre los Mr Meeseeks tendrán el siguiente orden
 \end{figure}
 
 \justify
-De esta forma, dado el índice de una tarea Mr Meeseeks en el scheduler, se puede obtener el índice en estos arrays restando $2$, y también se puede obtener qué número de Mr Meeseeks es para cada tarea principal restando $2$ y dividiendo por $2$.
+De esta forma, dado el índice de una tarea Mr. Meeseeks en el scheduler, se puede obtener el índice en estos arrays restando $2$, y también se puede obtener qué número de Mr. Meeseeks es para cada tarea principal restando $2$ y dividiendo por $2$.
 \justify
-Implementamos la función ``game_init"\ en \textbf{game.c}, y es llamada en \textbf{kernel.asm} antes de saltar a la tarea Idle. Esta función se encarga de iniciar los arrays de puntajes y color_players; colocar las Megasemillas e iniciar cant_Megasemilla; indicar al scheduler que las tareas Rick y Morty están listas, crear su CR3 e iniciar su TSS, lo cuál se realiza con las funciones ``mmu_init_task_dir" \ y ``tss_init_task"\ ; se crean las entradas en la GDT de las tareas Meeseeks con una gdt_entry  predeterminada llamada gdt_tarea_Mr_M, la cual es similar a las entradas de las tareas Rick y Morty; se inicializa el array page_stack0_Mr_M con páginas libres del kernel. Por último, se inicializan los arrays max_esp_task y min_esp_task, los cuales indican el rango de espacio virtual de la tarea. 
+Implementamos la función ``game_init"\ en \textbf{game.c}, y es llamada en \textbf{kernel.asm} antes de saltar a la tarea Idle. Esta función se encarga de iniciar los arrays de puntajes y color_players; colocar las Megasemillas e iniciar cant_Megasemilla; indicar al scheduler que las tareas Rick y Morty están listas, crear sus CR3 e iniciar sus TSS, lo cuál se realiza con las funciones ``mmu_init_task_dir" \ y ``tss_init_task"\ ; se crean las entradas en la GDT de las tareas Meeseeks con una gdt_entry  predeterminada llamada gdt_tarea_Mr_M, la cual es similar a las entradas de las tareas Rick y Morty; se inicializa el array page_stack0_Mr_M con páginas libres del kernel. Por último, se inicializan los arrays max_esp_task y min_esp_task, los cuales indican el rango de espacio virtual de la tarea. 
 \justify
 Para la distribución de semillas en la pantalla del juego, en primera instancia se completa el array posicion_Megasemillas, nombrado anteriormente, con posiciones aleatorias dentro del mapa con la función ``colocar_Megasemillas"\ declarada en \textbf{game.c}. Esta función tiene en cuenta que no se creen dos semillas en el mismo lugar del mapa. Una vez hecho esto, la función ``actualizar_pantalla"\ se encarga de recorrer este array y mostrar en pantalla todas las semillas que tienen una posición válida.
 \justify
-Para todas las rutinas de atención de syscalls se pushean todos los registros que no tienen que devolver ningún resultado y se salta a Idle luego de llamar a la función de C encargada de realizar la operatoria. Cuando la tarea se vuelve a ejecutar, se popean los registros y se realiza un iret. Las funciones en C se encuentran definidas en \textbf{game.c}.
+Para todas las rutinas de atención de syscalls implementadas en \textbf{isr.asm} se pushean todos los registros que no tienen que devolver ningún resultado y se salta a Idle luego de llamar a la función de C encargada de realizar la operatoria. Cuando la tarea se vuelve a ejecutar, se popean los registros y se realiza un iret. Las funciones en C se encuentran definidas en \textbf{game.c}.
 \justify
 \subsubsection{Servicio Meeseeks}
 \justify
