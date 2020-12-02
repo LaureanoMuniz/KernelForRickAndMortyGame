@@ -62,7 +62,7 @@ _isr%1:
 
     mov DWORD [debug_state], 2
     call imprimir_debug 
-    
+
     .no_debug:
     ;call print_exception
     call sched_desalojar
@@ -188,7 +188,10 @@ _isr100:
     ;mov eax, 0x64 
     call servicio_look_y
     mov ebx, eax
+    push ebx
     call servicio_look_x
+    pop ebx
+    
     jmp GDT_SEL_TSS_IDLE:0
     
     pop ecx
